@@ -1,2 +1,4 @@
 template: '/Users/zvb1/.pandoc/templates/pandoc-scholar.html'
 css: '/Users/zvb1/.pandoc/templates/pandoc-scholar.css'
+metadata:
+  csl: /Users/zvb1/.pandoc/csl/chicago-syllabus.csl

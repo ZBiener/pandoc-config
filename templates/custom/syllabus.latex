@@ -1,0 +1,200 @@
+% !TEX program = xelatex
+% !TEX encoding = UTF-8 Unicode
+
+% Definitions
+%
+\def\mysubtitle{$if(subtitle)$$subtitle$$endif$}
+\def\myaffiliation{$if(affiliation)$$affiliation$$endif$}
+\def\myaddress{$if(room)$$room$$endif$}
+\def\myemail{$for(correspondence)$$correspondence$$sep$ \and $endfor$}
+\def\myphone{$if(phone)$$for(phone)$$phone$$sep$ \and $endfor$$endif$}
+\def\myversion{}
+\def\myrevision{}
+
+\def\myauthor{$for(author)$$author$$sep$ \and $endfor$}
+
+\def\mytitle{{\small \MakeUppercase{
+    $if(course-number)$$course-number$$endif$
+    $if(date)$ · $date$$endif$
+    $if(time)$ · $time$$endif$
+    $if(room)$ ·$room$$endif$}
+\newline\vskip .5em } \HUGE $title$}
+
+
+\documentclass[12pt,article,oneside]{memoir}
+$if(geometry)$
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+$endif$
+\usepackage{xunicode}
+\usepackage{url}
+\usepackage[american]{babel}
+\usepackage[babel]{csquotes}
+\usepackage[svgnames]{xcolor}
+\usepackage{etoolbox}
+\usepackage{longtable,booktabs}
+\AtBeginEnvironment{longtable}{\sffamily\renewcommand*{\arraystretch}{2}}
+\usepackage{multirow}
+\usepackage{calc}
+\usepackage{amssymb}
+\usepackage{pifont}
+\usepackage{newunicodechar}
+\newunicodechar{✓}{\ding{51}}
+\newunicodechar{✗}{\ding{55}}
+\usepackage{textualicomma}
+
+
+$if(fontfamily)$
+\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+$endif$
+$if(linestretch)$
+\usepackage{setspace}
+\setstretch{$linestretch$}
+$endif$
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
+\else % if luatex or xelatex
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+$for(fontfamilies)$
+  \newfontfamily{$fontfamilies.name$}[$fontfamilies.options$]{$fontfamilies.font$}
+$endfor$
+$if(mainfont)$
+    \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+$endif$
+$if(sansfont)$
+    \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
+$endif$
+$if(monofont)$
+    \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
+$endif$
+
+
+
+% Format for sectioning commands. To be replaced with titlesec
+\renewcommand\thesection{\arabic{section}}
+\setsecheadstyle{\Large\sffamily\bfseries}
+\setsubsecheadstyle{\large\sffamily\bfseries}
+\setsubsubsecheadstyle{\normalsize\sffamily\bfseries}
+\renewcommand{\printchaptername}{}
+\renewcommand{\chapternamenum}{}
+\renewcommand{\chaptitlefont}{\normalfont\Huge\fontseries{bx}\sffamily\color{pagesectioning}}
+\renewcommand{\chapnumfont}{\chaptitlefont}
+\renewcommand{\printchapternum}{\chapnumfont \thechapter\space}
+\renewcommand{\afterchapternum}{}
+\renewcommand{\printchaptername}{\secheadstyle}
+\renewcommand{\cftchapterfont}{\normalfont}
+\renewcommand{\cftchapterpagefont}{\normalfont\sffamily}
+\renewcommand{\cftsectionpagefont}{\normalfont\sffamily}
+\renewcommand{\cftchapterpresnum}{\sffamily}
+% \renewcommand{\cftchapterleader}{}
+% \renewcommand{\cftchapterafterpnum}{\cftparfillskip}
+\captiontitlefont{\small}
+\settocdepth{chapter}
+\maxsecnumdepth{chapter}
+\setsecnumdepth{chapter}
+
+% Title
+\pretitle{\begin{flushleft}\LARGE\sffamily\bfseries}
+\posttitle{\end{flushleft}\par\vskip 2.5em}
+\preauthor{\begin{flushleft}\Large\sffamily}
+\postauthor{\end{flushleft}}
+\predate{\begin{flushleft}\sffamily\footnotesize\vspace{0.9em}}
+\postdate{\end{flushleft}\par\vskip 2em}
+
+% Remove top and bottom rules from longtables
+\setlength{\aboverulesep}{0pt}
+\setlength{\belowrulesep}{0pt}
+\setlength\heavyrulewidth{0pt}
+
+% Tightlist spacing
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep, topsep=-\parskip}
+
+
+% Fix for pandoc references class
+$if(csl-refs)$
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  
+  \sffamily
+  \setlength{\parindent}{0pt}
+
+  % return to tight default paragraph spacing, with extra space to offet beginning
+  \vspace{2.5ex}
+  \setlength{\parskip}{3.0pt plus 3.0pt}
+  \linespread{1}
+  \selectfont
+
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+
+
+\usepackage{siunitx}
+\sisetup{group-separator = {\,}}
+
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+$endif$
+$if(csquotes)$
+\usepackage{csquotes}
+$endif$
+
+\usepackage{hyperref}
+\hypersetup{
+$if(title-meta)$
+            pdftitle={$title-meta$},
+$endif$
+$if(author)$
+            pdfauthor={$for(author)$$author$$sep$, $endfor$},
+$endif$
+$if(subject)$
+            pdfsubject={$subject$},
+$endif$
+$if(keywords)$
+            pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
+$endif$
+$if(colorlinks)$
+            colorlinks=true,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$DarkRed$endif$,
+            filecolor=$if(filecolor)$$filecolor$$else$DarkRed$endif$,
+            citecolor=$if(citecolor)$$citecolor$$else$DarkRed$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$DarkRed$endif$,
+$else$
+            pdfborder={0 0 0},
+$endif$
+            breaklinks=true}
+
+%\urlstyle{same}
+
+\begin{document} 
+
+\title{\LARGE \mytitle}
+\author{\myauthor \newline \footnotesize\texttt{\myemail}}
+\date{}
+\maketitle
+
+% Create modern layout: no indent, larger paragraph separation, 1.2 line spacing. 
+% Use with case. PANDOC's CSLReferences environment inherits these settings, and
+% must be modified with any template updates.
+\setlength{\parindent}{0em}
+\linespread{1.1}
+\setlength{\parskip}{\baselineskip}
+\selectfont
+
+$body$
+
+\end{document}

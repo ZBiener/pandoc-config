@@ -1,0 +1,613 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+
+
+%%%%%%%%% FONTS, LINE SPACING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+$if(fontfamily)$
+\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+$else$
+\usepackage{lmodern}
+$endif$
+
+$if(linestretch)$
+\usepackage{setspace}
+\setstretch{$linestretch$}
+$endif$
+
+$if(indent)$
+$else$
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt} %%%THIS IS NEW. KEEP IT??????
+}
+$endif$
+
+$if(draft)$
+$else$
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
+  \usepackage[utf8]{inputenc}
+$if(euro)$
+  \usepackage{eurosym}
+$endif$
+\else % if luatex or xelatex
+$if(mathspec)$
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{unicode-math}
+  \fi
+$else$
+  \usepackage{unicode-math}
+$endif$
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+$for(fontfamilies)$
+  \newfontfamily{$fontfamilies.name$}[$fontfamilies.options$]{$fontfamilies.font$}
+$endfor$
+$if(euro)$
+  \newcommand{\euro}{€}
+$endif$
+$if(mainfont)$
+    \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+$endif$
+$if(sansfont)$
+    \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
+$endif$
+$if(monofont)$
+    \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
+$endif$
+$if(mathfont)$
+$if(mathspec)$
+  \ifxetex
+    \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+  \else
+    \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+  \fi
+$else$
+  \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+$endif$
+$endif$
+$if(CJKmainfont)$
+  \ifxetex
+    \usepackage{xeCJK}
+    \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
+    \setCJKsansfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
+  \fi
+$endif$
+\fi
+% use cambria to fix some font substitution problems for e.g. ⬄
+% \newfontfamily\fixfont[Numbers=Proportional]{Cambria}
+
+$endif$
+
+% use microtype if available
+$if(draft)$
+$else$
+\IfFileExists{microtype.sty}{%
+\usepackage[$for(microtypeoptions)$$microtypeoptions$$sep$,$endfor$]{microtype}}{} 
+$endif$
+
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+
+
+%% For Greek
+%
+%\usepackage[polutonikogreek,english]{babel}
+%\usepackage[LGR,T1]{fontenc}
+%\newcommand{\greek}[1]{{\selectlanguage{polutonikogreek}\textsf{#1}}} %for greek font, use \greek{text}
+
+% (end)
+%%%%%%%%% PAGE GEOMETRY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+$if(geometry)$
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+$endif$
+
+
+% (end)
+%%%%%%%%% LANGUAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold) 
+
+%\usepackage[american]{babel} %‘‘american’’ goes last, as main option. Required for namedashes in bibliography. \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
+
+
+
+
+
+% (end)
+%%%%%%%%% COMMONLY USED PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold) 
+$if(draft)$
+$else$
+\usepackage[lastpage,user]{zref} % Provides page references
+$endif$
+%\usepackage{csquotes} %Context-sensitive quotation facilities.
+
+
+%\usepackage[useregional,showseconds=false,show-zone=false]{datetime2} %For including timestamps in footer
+%\usepackage{environ}  %Allow the contents of an environment to be treated as a command. Used below for redefinition of abstract environment.
+	
+%\usepackage{graphicx}
+
+% (end)
+%%%%%%%%% LISTS, TABLES, GRAPHICS, COLOR, CAPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+%\usepackage{enumerate} % This package gives the enumerate environment an optional argument which determines the style in which the counter is printed.
+%\usepackage{enumitem} % customization of spacing above, below, sizes of  enumerate, itemize and description environments.
+%\setenumerate[0]{label=\textbf{(\alph*)}}
+$if(tables)$
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
+$endif$
+
+$if(graphics)$
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+$endif$
+
+
+$if(draft)$
+$else$
+\usepackage{xcolor}
+\definecolor{Blue}{RGB}{0,0,80}
+$endif$
+
+$if(draft)$
+$else$
+\usepackage[format=hang,labelfont=bf,labelsep=endash,font={sf,small}]{caption}
+$if(nonumberfigures)$
+\captionsetup[figure]{labelformat=empty}% redefines the caption setup of the figures environment
+$endif$
+$endif$
+
+% (end)
+%%%%%%%%% EPIGRAPH %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)	
+%\usepackage{epigraph}
+%\setlength{\epigraphwidth}{31em}
+%\setlength{\epigraphrule}{0pt}
+
+
+% (end)
+%%%%%%%%% LINE NUMBERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold) 
+%\usepackage[pagewise]{lineno}
+%\def\tempvar{yes}
+%\ifx\copyeditlines\tempvar
+%\linenumbers
+%\else
+%\fi
+
+% (end)
+%%%%%%%%% LESS USED PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold) 
+
+
+
+%\usepackage{etoolbox}  %Required for various other packages
+%\usepackage{multicol} %multicolumn environment when the document is not set to multiple columns.
+%\usepackage{relsize}  %defines font sizes relative to the current size; e.g. \smaller instead of \small
+%\usepackage[hang,flushmargin]{footmisc} % for footnotes whose first line is not indented.
+%\usepackage{slantsc} % for slanted small caps.	
+
+% (end)
+%%%%%%%%% BIBLATEX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+$if(biblatex)$
+\usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+\renewcommand*{\nameyeardelim}{\space} %To remove comma between author and year in authoryear format.
+
+
+%% REFORMAT THE DOI FIELD. 
+%% The default is small caps, which in many fonts has wide letter spacing.
+%% Below makes is regular caps, in small size.
+%
+\NewBibliographyString{doi}
+\DefineBibliographyStrings{english}{%
+  doi = {\footnotesize{DOI}},
+}
+\DeclareFieldFormat{doi}{%
+  \bibstring{doi}\addcolon\space
+  \ifhyperref
+    {\href{http://dx.doi.org/#1}{\nolinkurl{#1}}}
+    {\nolinkurl{#1}}}
+	
+	
+%% REMOVES BIBTEX FIELDS from bibliography entires %%%%%%%%%%%%%%
+%%
+\AtEveryBibitem{% Clean up the bibtex rather than editing it
+\clearfield{type} 
+%\clearfield{number} %Journal of the History of Philosophy supresses the number field.
+ 
+}
+$endif$
+% (end)
+%%%%%%%%% CITATION OPTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+%% If using authordate citation style, citep and citet commands may need to chage to cite.
+
+%\ifx\citep\undefined
+%	\let\citep\cite
+%	\let\citet\cite
+%\else
+%	\renewcommand\citep{\footcite}
+%	\renewcommand\citet{\footcite}
+%\fi
+	
+%\renewcommand*\footnoterule{} % REMOVE SMALL LINE BETWEEN TEXT AND FOOTNOTE
+
+%%%%%%%% MISC CUSTOMIZATIONS
+%%
+
+%% TO OMIT "p." or "pp." in cites and bibliography
+%% AND COMPRESS page count so 129-164 becomes 129-64.
+%
+\DeclareFieldFormat{postnote}{\mkcomprange{#1}}  
+\DeclareFieldFormat[book, article, incollection]{pages}{\mkcomprange{#1}}
+
+
+%\renewcommand{\bibpagespunct}{\ifentrytype{article}{\addcolon\addspace}{\addcomma\addspace}}
+%\DeclareFieldFormat[article,incollection]{pages}{#1}
+%\renewbibmacro{in:}{\ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
+
+%% Changes all "In:" to "in", applies in collected volumes, 
+%\renewbibmacro{in:}{%
+%\ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
+
+\renewcommand*{\intitlepunct}{\addspace} %% Theseparator between the word “in” 
+%% and the following title in entry types suchas @article, @inbook, @incollection, etc. 
+%% The default definition is a colon plus an interword space (e. g.,“Article, in: Journal”
+%% or “Title, in: Book”). Note that this is the separator string, not only the punctuation
+%% mark. If you don’t want a colon after “in”, \intitlepunct should still insert a space.
+
+%\renewcommand*{\nameyeardelim}{\space} %Control delimeter between author and year
+
+
+%%%%% Conrols parantheses in footnotes %%%
+%%
+%\makeatletter
+%\renewrobustcmd{\blx@mkbibfootnote}[2]{%
+%  \iftoggle{blx@footnote}
+%    {\blx@warning{Nested notes}%
+%     \addspace{#2}}% this was: \addspace\mkbibparens{#2}}
+%    {\unspace
+%     \ifnum\blx@notetype=\tw@
+%       \expandafter\@firstoftwo
+%     \else
+%       \expandafter\@secondoftwo
+%     \fi
+%       {\csuse{blx@theendnote#1}{\protecting{\blxmkbibnote{end}{#2}}}}
+%       {\csuse{footnote#1}{\protecting{\blxmkbibnote{foot}{#2}}}}}}
+%\makeatother
+
+
+$if(links-as-notes)$
+% Make links footnotes instead of hotlinks:
+\DeclareRobustCommand{\href}[2]{#2\footnote{\url{#1}}}
+$endif$
+
+% (end)
+%%%%%%%%% FANCY HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+$if(draft)$
+$else$
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{} \rhead{} \lfoot{} \cfoot{}
+\rfoot{\footnotesize ~\thepage~of~\zpageref{LastPage}$if(footertitle)$\\$footertitle$$endif$ }
+\renewcommand{\headrulewidth}{0.0pt} 
+
+%\fancypagestyle{firstpagestyle}
+%{
+%   \fancyhf{}
+%   \fancyfoot[R]{\footnotesize \today~|~\thepage~of~\zpageref{LastPage}\\\footertitle}
+%}
+$endif$
+
+% (end)
+%%%%%%%%% SECTION TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+
+$if(draft)$
+$else$
+\usepackage{titlesec}
+
+%%%%%%%%%% \section %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\titleformat{\section}[block] %command and shape
+%{\small\filcenter\addfontfeature{LetterSpace=7.0}} %for use with fontspec, instead of next line
+{\filcenter} %format
+{\oldstylenums{\thesection}.}% label
+{1em}%horizontal separation between label and title body 
+{\scshape\MakeLowercase}%code preceding the title body.
+[\normalfont\noindent]%code following the title body
+
+\titlespacing*{\section}  %starred version removes indent after heading.
+{0em}%increases the left margin,
+{6.5ex plus .1ex minus .2ex}%is the vertical space before the title.
+{1.4ex plus .1ex minus .2ex}%is the separation between title and text—vertical with hang, block, and display,  
+
+\makeatletter %% WHY IS THIS HERE?
+% package indentfirst says \let\@afterindentfalse\@afterindenttrue
+% and we revert this modification, reinstating the original definitio
+% of \@afterindentfalse
+\def\@afterindentfalse{\let\if@afterindent\iffalse}
+\makeatother
+
+%%%%%%%%%% \subsection %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+\titleformat{\subsection}[hang]
+{\normalfont}
+{\oldstylenums{\thesubsection}.}
+{1em}
+{\textit}
+[\normalfont\noindent]
+
+\titlespacing*{\subsection}
+{0em}{6.5ex plus .1ex minus .2ex}{3.4ex plus .1ex minus .2ex}
+
+$endif$
+
+
+% (end)
+%%%%%%%%% GOBBLEPARS COMMAND %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+% MMD forces a new paragraph after the end of a quote. The \gobblepars command 
+% removes all new paragraph commands after the end of a quote, until it finds a
+% line of text. This will eliminate the possibility of a new paragraph immediately
+% after a quote environment. If necessary, this can be done manually.
+% The \gobblepars command is introduced by the MMD2TEX-XSLT shell script, through SED
+% substitutions.
+
+\makeatletter
+\newcommand\gobblepars{%
+    \@ifnextchar\par%
+        {\expandafter\gobblepars\@gobble}%
+        {}}
+\makeatother
+
+% (end)
+%%%%%%%%% CUSTOMIZE QUOTE ENVIRONMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+
+\expandafter\def\expandafter\quote\expandafter{\quote\small\singlespacing}
+
+
+% (end)
+%%%%%%%%% THANKS FOOTNOTE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+%% since I'm not use \maketitle, this creates an asterisk footnote with \thanks 
+%% metadata as content its content
+%
+\makeatletter 
+\newcommand\thanksnote{%
+  \begingroup
+  \renewcommand\thefootnote{*}\footnote{$if(thanks)$$thanks$$endif$}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+
+% (end)
+
+%%%%%%%%% MISC PANDOC-SCHOLAR OPTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+
+
+% (end)
+
+%%%%%%%%% HYPERREF PACKAGE MUST BE LAST  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+%\usepackage{url} %DEPRACATES BY THE LINE RIGHT BELOW???
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+
+\usepackage{hyperref}
+ \hypersetup{$if(title-meta)$
+            pdftitle={$title-meta$},
+$endif$
+$if(author-meta)$
+            pdfauthor={$author-meta$},
+$endif$
+    hypertexnames, 
+ 	bookmarksnumbered, 
+	breaklinks=true,
+    pagebackref=true,
+	hyperfootnotes=true, 
+	pageanchor,
+	hidelinks=true,
+$if(colorlinks)$
+            colorlinks=true,
+            allcolors=Blue			
+$else$
+            pdfborder={0 0 0},
+$endif$
+}
+	\urlstyle{same} %In bibliography, make DOI (or any URL field) use the same font as main text. The default is small caps and it makes the URL look too large.
+	
+	
+%\usepackage{bookmark}  %better handling of complex linking structure, like many-one, etc.
+
+
+% (end)
+%%%%%%%%% CORRECTIONS TO HYPERREF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+%% Hyperref URL link can span a page if a citation extends from one page to 
+%% the next. Below defines the link structure so the link looks less ugly. 
+%% Not sure it works or does anything, since hard to reproduce.
+%% 
+
+$if(draft)$
+$else$
+\usepackage{zref-abspage}
+\makeatletter
+\newcounter{lnkpg}
+\renewcommand*{\thelnkpg}{lnkpg\the\value{lnkpg}}
+\newcommand*{\org@hyper@link@}{}
+\let\org@hyper@link@\hyper@link@
+\protected\def\hyper@link@[#1]#2#3#4{%
+  \def\lnkpg@callorg{%
+    \org@hyper@link@[{#1}]{#2}{#3}{#4}%
+  }%
+  \stepcounter{lnkpg}%
+  \zref@labelbyprops{\thelnkpg a}{abspage}%
+  \zref@refused{\thelnkpg a}%
+  \zref@ifrefundefined{\thelnkpg a}{%
+    \lnkpg@callorg
+    \zref@labelbyprops{\thelnkpg b}{abspage}%
+  }{%
+    \zref@ifrefundefined{\thelnkpg b}{%
+      \mbox{\lnkpg@callorg}%
+    }{%
+      \edef\lnkpg@a{\zref@extractdefault{\thelnkpg a}{abspage}{0}}%
+      \edef\lnkpg@b{\zref@extractdefault{\thelnkpg b}{abspage}{0}}%
+      \ifx\lnkpg@a\lnkpg@b
+        \lnkpg@callorg
+        \zref@labelbyprops{\thelnkpg b}{abspage}%
+      \else
+        \mbox{\lnkpg@callorg}%
+      \fi
+    }%
+  }%
+}
+\makeatother
+
+
+%% By default, hyperref only uses years in the authoryear format as links.
+%% Below makes the entire citation linkable.
+%% IT MAY INTERFERE WITH AUTHORTITLE
+%%
+\ExecuteBibliographyOptions{maxcitenames=3}
+
+\DeclareFieldFormat{citehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{#1}}
+
+\DeclareFieldFormat{textcitehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{%
+    #1%
+    \ifbool{cbx:parens}
+      {\bibcloseparen\global\boolfalse{cbx:parens}}
+      {}}}
+
+\savebibmacro{cite}
+\savebibmacro{textcite}
+
+\renewbibmacro*{cite}{%
+  \printtext[citehyperref]{%
+    \restorebibmacro{cite}%
+    \usebibmacro{cite}}}
+
+\renewbibmacro*{textcite}{%
+  \ifboolexpr{
+    ( not test {\iffieldundef{prenote}} and
+      test {\ifnumequal{\value{citecount}}{1}} )
+    or
+    ( not test {\iffieldundef{postnote}} and
+      test {\ifnumequal{\value{citecount}}{\value{citetotal}}} )
+  }
+    {\DeclareFieldAlias{textcitehyperref}{noformat}}
+    {}%
+  \printtext[textcitehyperref]{%
+    \restorebibmacro{textcite}%
+    \usebibmacro{textcite}}}
+	
+
+% (end)
+$endif$
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\normalfont\normalsize
+%\thispagestyle{firstpagestyle}
+%\raggedright for no indentation on paragraphs
+
+%%%%%%%%%%%% TITLE BLOCK %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+% This block instead of \maketitle
+$if(printtitle)$
+\vspace*{-0.4in}
+
+\begin{center}
+	$if(title)$
+	\def\mytitle{$title$}
+	\huge{$if(draft)$$else$\textls[20]$endif$\mytitle}\\
+	$endif$
+	$if(subtitle)$
+	\def\mysubtitle{$subtitle$}
+	\LARGE{\textls[20]\mysubtitle}\\
+	$endif$
+	\vskip 20pt
+	$if(author)$\large{\textsc{\MakeLowercase{$for(author)$$author.name$$sep$ \and $endfor$}}}\thanksnote\\$endif$
+	$if(draft)$$else$$if(institute)$\textsc{\MakeLowercase{$institute$}}$endif$\\$endif$
+\end{center}
+
+\vskip 05pt
+$endif$
+% (end)
+
+$if(linestretch)$\setstretch{$linestretch$}$endif$
+\noindent\gobblepars
+
+
+$if(abstract)$
+\begin{abstract}
+\vspace{-2em}\singlespacing\noindent\textsf{$abstract$}
+\end{abstract}
+$endif$
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+$if(toc)$
+{
+$if(colorlinks)$
+\hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$black$endif$}
+$endif$
+\setcounter{tocdepth}{$toc-depth$}
+\tableofcontents
+}
+$endif$
+$if(lot)$
+\listoftables
+$endif$
+$if(lof)$
+\listoffigures
+$endif$
+$body$
+
+$if(natbib)$
+$if(bibliography)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+$endif$
+$endif$
+
+
+$if(biblatex)$
+\setlength\bibitemsep{0pt}
+\phantomsection\addcontentsline{toc}{section}{$biblio-title$}
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}

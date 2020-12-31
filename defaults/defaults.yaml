@@ -1,0 +1,17 @@
+standalone: true
+verbosity: INFO # verbose by default
+
+citeproc: true
+cite-method: citeproc
+filters:
+  - /Users/zvb1/.pandoc/filters/pagebreak.lua 
+
+metadata:
+  reference-links: true
+  reference-section-title: References
+  notes-after-punctuation: false
+  link-citations: true
+  csl-hanging-indent: true
+  lang: 'en-US'
+
+

@@ -1,0 +1,313 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8 Unicode
+\documentclass[10pt]{article}
+
+%%%%%%%%% FONT CHOICE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX}
+    \setmainfont[Numbers=Lining, Numbers=Proportional]{Constantia}
+    \setsansfont[Numbers=Lining, Numbers=Proportional]{Constantia}
+    \setmonofont[Mapping=tex-ansi]{Fira Code}
+  \setmathfont[math-style=ISO,bold-style=ISO]{Cambria Math}
+\fi
+
+
+%%%%%%%%% PAGE SIZE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\myhorizontalmargin{0.39in}
+\def\myverticalmargin{0.775in}
+\usepackage[twoside, %these are dimension for elsevier 5p class.
+  paperwidth=210mm,
+  paperheight=280mm,
+  top=64pt,
+  textheight=682pt,
+  textwidth=522pt,
+  centering,
+  headheight=50pt,
+  headsep=7pt,
+  footskip=18pt,
+  footnotesep=24pt plus 2pt minus 12pt,
+  columnsep=18pt]{geometry}
+
+%%%%%%%%%% COMMONLY USED PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[lastpage,user]{zref} % Provides page references
+\usepackage{setspace} %easy spacing commands like \onehalfspacing
+\usepackage{csquotes} %Context-sensitive quotation facilities.
+\usepackage{environ}  %Allow the contents of an environment to be treated as a command. Used below for redefinition of abstract environment.
+\usepackage[american]{babel} %‘‘american’’ goes last, as main option. Required for namedashes in bibliography.
+\usepackage{tabularx}
+%\usepackage{graphicx}
+
+%%%%%%%%%% LISTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{enumerate} % This package gives the enumerate environment an optional argument which determines the style in which the counter is printed.
+%\usepackage{enumitem} % customization of spacing above, below, sizes of  enumerate, itemize and description environments.
+%\setenumerate[0]{label=\textbf{(\alph*)}}
+
+
+%%%%%%%%%% EPIGRAPH %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{epigraph}
+%\setlength{\epigraphwidth}{31em}
+%\setlength{\epigraphrule}{0pt}
+
+
+
+%%%%%%%%% LINE NUMBERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[pagewise]{lineno}
+%\def\tempvar{yes}
+%\ifx\copyeditlines\tempvar
+%\linenumbers
+%\else
+%\fi
+
+
+%%%%%%%% LESS USED PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage[letterspace=150,tracking=true]{microtype} % Provides trackling for letters, the bigger "letterspace" number, the wider the letters.
+%\usepackage{etoolbox}  %Required for various other packages
+%\usepackage[normalem]{ulem}  % provides sorts of underlinings.
+\usepackage{multicol} %multicolumn environment when the document is not set to multiple columns.
+%\usepackage{relsize}  %defines several commands for font sizes relative to the current size.
+
+
+%%%%%% CITATION OPTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%\ifx\citep\undefined
+%	\let\citep\cite
+%	\let\citet\cite
+%\else
+%	\renewcommand\citep{\footcite}
+%	\renewcommand\citet{\footcite}
+%\fi
+
+
+
+%%%%% Conrols parantheses in footnotes %%%
+%%
+%\makeatletter
+%\renewrobustcmd{\blx@mkbibfootnote}[2]{%
+%  \iftoggle{blx@footnote}
+%    {\blx@warning{Nested notes}%
+%     \addspace{#2}}% this was: \addspace\mkbibparens{#2}}
+%    {\unspace
+%     \ifnum\blx@notetype=\tw@
+%       \expandafter\@firstoftwo
+%     \else
+%       \expandafter\@secondoftwo
+%     \fi
+%       {\csuse{blx@theendnote#1}{\protecting{\blxmkbibnote{end}{#2}}}}
+%       {\csuse{footnote#1}{\protecting{\blxmkbibnote{foot}{#2}}}}}}
+%\makeatother
+
+
+%%%%%%%% FANCY HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{} \rhead{} \chead{ \footnotesize \emph{$if(author)$$author.name$$endif$~--~$if(footertitle)$$footertitle$$endif$}}
+\lfoot{} \cfoot{} \rfoot{\footnotesize \thepage~of~\zpageref{LastPage}}
+%\rfoot{\footnotesize Biener ~ | \footertitle \\ \today~|~\thepage~of~\zpageref{LastPage}}
+
+\renewcommand{\headrulewidth}{0.0pt}
+
+\fancypagestyle{firstpagestyle}
+{
+  \lhead{} \rhead{} 
+  \chead{}
+  \lfoot{} \cfoot{} 
+  \rfoot{\footnotesize $if(footertitle)$$footertitle$$endif$}
+}
+
+
+%%%%%%%%%% SECTION TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{titlesec}  %Changes section title fonts.
+
+%%%%%%%%%% \section %%%%%%%%%%%%%%%%%%%%%
+%%
+\titleformat{\section}[hang] %command and shape
+%{\small\filcenter\addfontfeature{LetterSpace=7.0}} %for use with fontspec, instead of next line
+{\normalfont} %format
+{\textbf{\thesection}.}% label
+{0.5em}%horizontal separation between label and title body
+{\textbf}%code preceding the title body.
+[\normalfont]%code following the title body
+
+\titlespacing{\section}
+{0em}%increases the left margin,
+{6.5ex plus .1ex minus .2ex}%is the vertical space before the title.
+{1ex plus .1ex minus .2ex}%is the separation between title and text—vertical with hang, block, and display,
+
+%%%%%%%%%% \subsection %%%%%%%%%%%%%%%%%%%%
+%%
+\titleformat{\subsection}[hang]
+{\normalfont}
+{{\thesubsection}.}
+{1em}
+{\textit}
+[\normalfont]
+
+\titlespacing{\subsection}
+{0em}{6.5ex plus .1ex minus .2ex}{3.4ex plus .1ex minus .2ex}
+
+
+%%%%%%%%%% CUSTOMIZE QUOTE ENVIRONMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% shps style has zero-sized right margin
+%%
+\renewenvironment{quote}
+  {\vspace{-1ex}\singlespacing\list{}{\rightmargin=0cm}%
+   \item\relax}
+  {\endlist}
+
+
+%%%%% NEW COMMAND FOR ASTERISK THANKS FOOTNOTE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% creates an asterisks footnote with \thanks metadata as content
+%%
+\makeatletter
+\newcommand\thanksnote{%
+  \begingroup
+  \renewcommand\thefootnote{*}\footnote{$if(thanks)$$thanks$$endif$}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+
+%%%%% REMOVE ABSTRACT FOR SPECIAL FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The abstract in the elzevier format needs special handling. The command below
+% dumps the contents of the abstract into a dummy command, in essence deleting
+%% the abstract. The real abstract will be read from "abtract.txt". The latter
+%% file is generated from my ZB-scrivener-transform.pl
+
+%% THIS SHOULD BE FIXABLE WITH THE MULTICOL PACKAGE
+
+\RenewEnviron{abstract}{%
+\global\let\testcontents\BODY
+}
+
+
+%%%%%%%%%%% HYPERREF PACKAGE MUST BE LAST  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ \usepackage{hyperref}
+ \hypersetup{
+ 	hypertexnames,
+	bookmarksnumbered,
+	breaklinks=true,
+	pageanchor,
+  $if(title-meta)$
+  pdftitle={$title-meta$},
+  $endif$
+  $if(author-meta)$
+  pdfauthor={$author-meta$},
+  $endif$
+	colorlinks,
+	%allcolors=[RGB]{69,117,150}
+	}
+ %\usepackage{bookmark}
+
+
+%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+
+%%%%%%%%%%%%% FIRST PAGE HEADER SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\thispagestyle{firstpagestyle}
+
+\normalfont\normalsize
+%\renewcommand{\baselinestretch}{\linespacing} \selectfont
+%\raggedright for no indentation on paragraphs
+
+
+
+%%%%%%%%%%%% TITLE BLOCK %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%% BEGIN TITLE BLOCK THE SPANS TWO COLUMNS ***********
+
+%\twocolumn[
+%\begin{@twocolumnfalse}
+
+
+%\vspace*{10pt}
+\vspace{10pt}
+
+\noindent
+\LARGE{$if(title)$$title$$endif$}
+
+\vspace{5pt}
+\large{$if(subtitle)$$subtitle$$endif$}
+\vspace{26pt}
+
+\vspace*{-09pt}
+\noindent
+\large{$if(author)$$author.name$$endif$}
+\par
+\vspace*{5pt}
+\noindent\footnotesize{\emph{$if(author.affiliation)$
+$author.affiliation$$endif$}}\\
+\par
+
+%%%%%%%%%%%% ABSTRACT BLOCK %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent\rule{\textwidth}{.4pt}
+\noindent
+\begin{tabularx}{\textwidth}{p{0.1\textwidth} p{0.06\textwidth} X@{}}
+& &  					\\
+& & A B S T R A C T 	\\
+%& & \hrule			 	\\
+& & $if(abstract)$$abstract$$endif$ \\
+%& & \hrule 				 \\
+\end{tabularx}
+
+\vskip 25pt
+\noindent\rule{\textwidth}{.4pt}
+\vspace*{12pt}
+
+%\end{@twocolumnfalse}
+%]
+
+%%%%%%%%%%%% BEGIN TWO COLUMN %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\small
+\setstretch{0.954}
+
+%% TWO COLUMN CUSTOMIZATION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% If the footnotes should span both columns, remove option "twocolumn" from Article
+%% class options. Uncomment the multicolumn environment below.
+
+%\emailaddressnote
+
+
+%%%%%%% CHECK FOR EMAIL ADDRESS VARIABLE AND INSERT %%%%%%%%%%
+\setbox0=\hbox{$if(correspondence)$$correspondence$$endif$\unskip}\ifdim\wd0=0pt
+  {}
+\else
+\makeatletter{\renewcommand*{\@makefnmark}{}
+\footnotetext{\emph{E-mail address}: $if(correspondence)$$correspondence$$endif$}\makeatother}
+\fi
+
+%%%%%% INSERT THANKS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Because the title is not set in twocolumn mode, the existing
+%% thanksnote command is lost somehow. This inserts it again. THIS IS A SERIOUSly BAD KLUDGE.
+
+\setbox0=\hbox{$if(thanks)$$thanks$$endif$\unskip}\ifdim\wd0=0pt
+  {}
+\else
+\makeatletter{\renewcommand*{\@makefnmark}{}
+\footnotetext{$$^{*}$$$if(thanks)$$thanks$$endif$}\makeatother}
+\fi
+
+
+
+\begin{multicols}{2}
+
+
+$body$
+
+\end{multicols}
+\end{document}

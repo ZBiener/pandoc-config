@@ -3,6 +3,7 @@ to: latex
 standalone: true
 template: /Users/zvb1/.pandoc/templates/custom/syllabus.latex
 metadata:
+  csl: /Users/zvb1/.pandoc/csl/chicago-syllabus.csl
   mainfont: 'Minion Pro'
   mainfontoptions: 'Mapping=tex-text, Numbers=Proportional'
   sansfont: 'Myriad Pro SemiExtended'
@@ -10,3 +11,4 @@ metadata:
   monofont: 'TeX Gyre Cursor'
   monofontoptions: 'Scale=0.8'
   colorlinks: true
+  geometry: 'margin=1.5in'

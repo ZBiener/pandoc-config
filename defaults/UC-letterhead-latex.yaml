@@ -2,7 +2,7 @@ from: markdown+raw_tex+simple_tables+escaped_line_breaks
 to: latex
 template: /Users/zvb1/.pandoc/templates/custom/UC_letterhead.latex
 metadata:
-  opening: To whom it may concern,
+  #opening: To whom it may concern,
   closing: Sincerely,
   firstpagefooter: "An affirmative action/equal opportunity institution"
   letterhead: "/Users/zvb1/.pandoc/images/UCIDPrimaryBlackRed.pdf"

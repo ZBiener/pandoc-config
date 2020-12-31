@@ -1,29 +1,29 @@
-from: markdown
+from: markdown+raw_tex+simple_tables+escaped_line_breaks
 to: latex
-pdf-engine: xelatex
-standalone: true
-template: letter.latex
+template: /Users/zvb1/.pandoc/templates/custom/UC_letterhead.latex
 metadata:
+  #opening: To whom it may concern,
+  closing: Sincerely,
+  firstpagefooter: ""
+  #letterhead: "/Users/zvb1/.pandoc/images/UCIDPrimaryBlackRed.pdf"
+  wallpaperXoffset: 1in #usually the same as the margins set in geometry metadata
+  wallpaperYoffset: 1in #usually the same as the margins set in geometry metadata
+  headerfont: 'Open Sans'
   papersize: letter
-  return-address:
-  opening: To whom it may concern,
-  closing: Sincerely yours,
+  geometry: ['margin=1in, bottom=1.1in']
   mainfont: 'TeX Gyre Pagella'
-  mainfontoptions: 'Numbers=Proportional'
+  mainfontoptions: 'Numbers=OldStyle, Numbers=Proportional'
   monofont: 'Fira Code'
   mathfont: 'Cambria Math'
   mathfontoptions: 'math-style=ISO,bold-style=ISO'
-  CJKmainfont: 'PingFang SC'
   fontsize: '12pt'
   linestretch: '1.1'
-  signature-width: 45mm
-  signature-before: -11ex
-  signature-after: -1.5ex
-  closing-indentation: 12pt
+  signature-before: -6ex
+  signature-after: 1ex
+  signature-width: 70mm
+  closing-indentation: 0pt
   links-as-notes: false
   colorlinks: true
   linkcolor: Mahogany
   citecolor: Sepia
   urlcolor: BrickRed
-  lang: 'en-GB'
-  geometry: ['margin=1.5cm','top=2.1cm']

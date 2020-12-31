@@ -1,0 +1,89 @@
+
+.reveal h1 {
+  font-size: 2.3em; }
+
+
+.reveal h2 {
+  font-size: 1.7em; }  
+
+.reveal pre code {
+  display: block;
+  padding: 5px;
+  overflow: auto;
+  max-height: 600px;
+  word-wrap: normal; }
+
+.reveal blockquote {
+  display: block;
+  position: relative;
+  margin: 20px auto;
+  width: 100%;
+  padding: 5px;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  font-size: 0.55em;
+  font-family: monospace;
+  }
+
+.reveal .slides {
+  text-align: left;
+}
+
+
+/**************
+ weird changes to allow scrolling in nap and individual slides. Highly breakable. It is easiest to keep scolling on individual slides only, and disable the map view. The n-th child is probably not needed
+
+div.overview > .slides section:nth-child(3)  {
+    background: red;
+    overflow-y: hidden;
+}
+
+div:not(.overview) > .slides section:nth-child(3)  {
+    background: green;
+    overflow-y: scroll ;
+    pointer-events: auto;
+    -ms-overflow-style: none;  
+    scrollbar-width: none; 
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+div:not(.overview) > .slides section:nth-child(3)::-webkit-scrollbar {
+    display: none;
+}
+
+*/
+
+
+/* Scrolling in map */
+div.overview section .slide   {
+    overflow-y: auto !important;
+    pointer-events: auto !important;
+}
+
+
+/* Scrolling in individual slides, with odd selectors so not to break map layout */
+body.reveal-viewport div.reveal.fade.center.focused.has-horizontal-slides.ready:not(.overview) div.slides {
+      overflow-y: scroll ;
+    pointer-events: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+
+
+
+body.reveal-viewport div.reveal.fade.center.focused.has-vertical-slides.has-horizontal-slides.ready div.slides::-webkit-scrollbar {
+    display: none;
+}
+
+html.reveal-full-page body.reveal-viewport div.reveal.fade.center.focused.has-vertical-slides.has-horizontal-slides.ready.overview div.slides section.stack.present {
+    overflow-y: unset ;
+    pointer-events: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+
+

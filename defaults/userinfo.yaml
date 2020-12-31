@@ -1,0 +1,23 @@
+author: Zvi Biener
+jobtitle: Associate Professor
+affiliation: University of Cincinnati
+correspondence: zvi.biener@uc.edu
+#author:
+#  - name: Zvi Biener
+#    affiliation: [1]
+#    correspondence: zvi.biener@uc.edu
+#institute:
+#  - 1: University of Cincinnati
+phone: 513-818-2984
+closing: Sincerely,
+return-address:
+  - "**Department of Philosophy**"
+  - "**Arts & Sciences**"
+  - ML 0374
+  - University of Cincinnati
+  - Cincinnati OH 45221-0374
+signature: "/Users/zvb1/.pandoc/images/ZBsignature.pdf"
+created: "<$createdDate>"
+compiled: "<$fulldate> @ <$fulltime>"
+wordcount: <$wc>
+lang: 'en-US'

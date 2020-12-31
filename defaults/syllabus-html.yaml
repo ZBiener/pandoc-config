@@ -1,0 +1,2 @@
+filters:
+  - /Users/zvb1/.pandoc/filters/assimilateSyllabusMetadata.rb #regularise metadata

@@ -1,0 +1,29 @@
+from: markdown
+to: latex
+pdf-engine: xelatex
+standalone: true
+template: letter.latex
+metadata:
+  papersize: letter
+  return-address:
+  opening: To whom it may concern,
+  closing: Sincerely yours,
+  mainfont: 'TeX Gyre Pagella'
+  mainfontoptions: 'Numbers=Proportional'
+  monofont: 'Fira Code'
+  mathfont: 'Cambria Math'
+  mathfontoptions: 'math-style=ISO,bold-style=ISO'
+  CJKmainfont: 'PingFang SC'
+  fontsize: '12pt'
+  linestretch: '1.1'
+  signature-width: 45mm
+  signature-before: -11ex
+  signature-after: -1.5ex
+  closing-indentation: 12pt
+  links-as-notes: false
+  colorlinks: true
+  linkcolor: Mahogany
+  citecolor: Sepia
+  urlcolor: BrickRed
+  lang: 'en-GB'
+  geometry: ['margin=1.5cm','top=2.1cm']

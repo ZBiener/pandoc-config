@@ -1,0 +1,12 @@
+from: markdown+multiline_tables
+to: latex
+standalone: true
+template: /Users/zvb1/.pandoc/templates/custom/syllabus.latex
+metadata:
+  mainfont: 'Minion Pro'
+  mainfontoptions: 'Mapping=tex-text, Numbers=Proportional'
+  sansfont: 'Myriad Pro SemiExtended'
+  sansfontoptions: 'Mapping=tex-text, Numbers=Proportional'
+  monofont: 'TeX Gyre Cursor'
+  monofontoptions: 'Scale=0.8'
+  colorlinks: true

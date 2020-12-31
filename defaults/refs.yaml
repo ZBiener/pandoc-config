@@ -1,0 +1,15 @@
+standalone: true
+verbosity: INFO # verbose by default
+citeproc: true
+cite-method: citeproc
+bibliography: "/Users/zvb1/Library/texmf/bibtex/bib/BibDeskLibrary.json" #converted from the bib format, just for CSL use. #JSON faster than BIB
+#citation-abbreviations: /Users/zvb1/.pandoc/cite-abbr.json # my journal abbreviations
+csl: /Users/zvb1/.pandoc/csl/chicago-syllabus.csl
+filters:
+  - /Users/zvb1/.pandoc/filters/pagebreak.lua # use \newpage{} also for HTML and docx
+reference-links: true
+metadata:
+  reference-section-title: References
+  notes-after-punctuation: false
+  link-citations: true
+  csl-hanging-indent: true

@@ -1,0 +1,52 @@
+from: markdown
+to: latex
+pdf-engine: pdflatex
+standalone: true
+biblatex: true
+filter:
+#  - filters/assimilateMetadata.rb #convert author: to author: [name: affiliation:]
+template: templates/custom/jhp.latex
+dpi: 300
+base-header-level: 1
+metadata:
+bibliography: "/Users/zvb1/Library/texmf/bibtex/bib/BibDeskLibrary.bib"
+  fontfamily: libertine
+  linestretch: '1.2'
+  biblio-title: References
+  biblio-style: authortitle
+  biblatexoptions: 'natbib,backend=biber,
+  backref=false,
+  hyperref=auto,
+  abbreviate=false,
+  bibencoding=utf8,
+  usetranslator=true,
+  doi=true,
+  isbn=false,
+  eprint=false,
+  citestyle=authoryear,
+  '
+  #citestyle=authortitle,
+  #bibstyle=jhp
+  #customize via cbs, and lbx files.
+  #customize via bbs, and lbx files.
+  lof: false
+  toc: false
+  indent: true
+  fontsize: '11pt'
+  microtypeoptions: 'letterspace=200,tracking=true'
+  geometry: 'right=1.55in, left=1.55in, top=1.4in, bottom=1.4in'
+  classoption: oneside
+  mainfont: 'TeX Gyre Termes'
+  mainfontoptions: 'Numbers=OldStyle,Numbers=Proportional'
+  sansfont: 'TeX Gyre Adventor'
+  sansfontoptions: 'Numbers=OldStyle,Numbers=Proportional'
+  monofont: 'Courier'
+  mathfont: 'Cambria Math'
+  mathfontoptions: 'math-style=ISO,bold-style=ISO'
+  colorlinks: true
+  lang: 'en-US'
+  documentclass: 'article'
+  nonumberfigures: true
+  postprocessors:
+  - 'postprocessors/fixLaTeX.rb'
+  #- 'postprocessors/fixLaTeX.rb-ZB'

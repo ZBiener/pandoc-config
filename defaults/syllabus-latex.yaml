@@ -1,9 +1,9 @@
 from: markdown+multiline_tables
 to: latex
 standalone: true
-template: /Users/zvb1/.pandoc/templates/custom/syllabus.latex
+template: syllabus.latex
 metadata:
-  csl: /Users/zvb1/.pandoc/csl/chicago-syllabus.csl
+  csl: chicago-syllabus.csl
   mainfont: 'Minion Pro'
   mainfontoptions: 'Mapping=tex-text, Numbers=Proportional'
   sansfont: 'Myriad Pro SemiExtended'

@@ -1,14 +1,8 @@
-# Personal Info
+# Personal Info:
 author: Zvi Biener
 jobtitle: Associate Professor
 affiliation: University of Cincinnati
 correspondence: zvi.biener@uc.edu
-#author:
-#  - name: Zvi Biener
-#    affiliation: [1]
-#    correspondence: zvi.biener@uc.edu
-#institute:
-#  - 1: University of Cincinnati
 phone: 513-818-2984
 closing: Sincerely,
 return-address:
@@ -18,8 +12,9 @@ return-address:
   - University of Cincinnati
   - Cincinnati OH 45221-0374
 signature: "/Users/zvb1/Pictures/ZBsignature.pdf"
+# Data files:
 bibliography: "/Users/zvb1/Library/texmf/bibtex/bib/BibDeskLibrary.json" #converted from the bib format, just for CSL use. #JSON faster than BIB
-# Misc metadata for templates
+# Variables for templates:
 created: "<$createdDate>"
 compiled: "<$fulldate> @ <$fulltime>"
 wordcount: <$wc>

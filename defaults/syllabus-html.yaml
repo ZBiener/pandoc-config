@@ -1,2 +1,4 @@
 filters:
-  - /Users/zvb1/.pandoc/filters/assimilateSyllabusMetadata.rb #regularise metadata
+  - assimilateSyllabusMetadata.rb #regularise metadata
+metadata:
+  csl: chicago-syllabus.csl

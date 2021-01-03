@@ -1,4 +1,0 @@
-filters:
-  - assimilateSyllabusMetadata.rb #regularise metadata
-metadata:
-  csl: chicago-syllabus.csl

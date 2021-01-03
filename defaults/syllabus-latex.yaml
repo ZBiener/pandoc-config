@@ -1,9 +1,8 @@
 from: markdown+multiline_tables
 to: latex
 standalone: true
-template: syllabus.latex
+template: syllabus.latex 
 metadata:
-  csl: chicago-syllabus.csl
   mainfont: 'Minion Pro'
   mainfontoptions: 'Mapping=tex-text, Numbers=Proportional'
   sansfont: 'Myriad Pro SemiExtended'

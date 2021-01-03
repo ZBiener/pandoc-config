@@ -13,11 +13,11 @@ Paru::Filter.run do
 
 	#============subtitle
 
-	subtitleArray.push(metadata['course-number']) if metadata.key?('course-number')
+	subtitleArray.push(metadata['course_number']) if metadata.key?('course_number')
 	subtitleArray.push(metadata['date']) if metadata.key?('date')
 	subtitleArray.push(metadata['time']) if metadata.key?('time')
 	subtitleArray.push(metadata['location']) if metadata.key?('location')
-	subtitleArray.push(metadata['office-hours']) if metadata.key?('office-hours')
+	subtitleArray.push(metadata['office_hours']) if metadata.key?('office_hours')
 	metadata['subtitle'] = subtitleArray.join(' · ') unless subtitleArray.empty?
 
 	#============ name and affiliation

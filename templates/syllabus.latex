@@ -14,10 +14,8 @@
 \def\myauthor{$for(author)$$author$$sep$ \and $endfor$}
 
 \def\mytitle{{\small \MakeUppercase{
-    $if(course-number)$$course-number$$endif$
-    $if(date)$ · $date$$endif$
-    $if(time)$ · $time$$endif$
-    $if(room)$ ·$room$$endif$}
+  $if(course_details)$ $for(course_details)$ $course_details$ $sep$ · $endfor$ $endif$
+}
 \newline\vskip .5em } \HUGE $title$}
 
 

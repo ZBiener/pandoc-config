@@ -1,0 +1,4 @@
+filters:
+  - gather_course_metadata.lua 
+metadata:
+  csl: chicago-syllabus.csl

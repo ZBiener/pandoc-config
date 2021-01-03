@@ -6,10 +6,10 @@ require 'open3'
 metadata_filename = "/Users/zvb1/.pandoc/defaults/userinfo.yaml"
 
 hash = {
-    "syllabus_html" 	=>   ["-d defaults -d scholar-html -d syllabus-html", "html"],
+    "syllabus_html" 	=>   ["-d defaults -d syllabus-html --self-contained", "html"],
     "syllabus_pdf"  	=>   ["-d defaults -d syllabus-latex --pdf-engine=xelatex --quiet", "pdf"],
     "UC_letterhead_pdf"	=>   ["-d defaults -d UC-letterhead-latex --pdf-engine=xelatex --quiet", "pdf"],
-    "letter_pdf"	=>      ["-C -d letter --pdf-engine=xelatex --quiet", "pdf"],
+    "letter_pdf"	    =>   ["-d defaults -d letter --pdf-engine=xelatex --quiet", "pdf"],
 }
 
 ## Match the hash key with the user input, to find the required set of options

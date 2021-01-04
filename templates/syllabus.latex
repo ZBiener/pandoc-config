@@ -1,17 +1,6 @@
 % !TEX program = xelatex
 % !TEX encoding = UTF-8 Unicode
 
-% Definitions
-%
-\def\mysubtitle{$if(subtitle)$$subtitle$$endif$}
-\def\myaffiliation{$if(affiliation)$$affiliation$$endif$}
-\def\myaddress{$if(room)$$room$$endif$}
-\def\myemail{$for(correspondence)$$correspondence$$sep$ \and $endfor$}
-\def\myphone{$if(phone)$$for(phone)$$phone$$sep$ \and $endfor$$endif$}
-\def\myversion{}
-\def\myrevision{}
-
-\def\myauthor{$for(author)$$author$$sep$ \and $endfor$}
 
 \def\mytitle{{\small \MakeUppercase{
   $if(course_details)$ $for(course_details)$ $course_details$ $sep$ · $endfor$ $endif$
@@ -157,7 +146,7 @@ $if(title-meta)$
             pdftitle={$title-meta$},
 $endif$
 $if(author)$
-            pdfauthor={$for(author)$$author$$sep$, $endfor$},
+            pdfauthor={$for(author)$$author.name$$sep$, $endfor$},
 $endif$
 $if(subject)$
             pdfsubject={$subject$},
@@ -181,7 +170,10 @@ $endif$
 \begin{document} 
 
 \title{\LARGE \mytitle}
-\author{\myauthor \newline \footnotesize\texttt{\myemail}}
+\author{$for(author)$$author.name$%\vspace{1ex} 
+%\newline\small{$author.affiliation$}
+%\vspace{.1ex} 
+\newline\footnotesize\texttt{\href{mailto:$author.email$}{$author.email$}}$sep$\newline$endfor$}
 \date{}
 \maketitle
 

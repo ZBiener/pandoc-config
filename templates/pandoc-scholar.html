@@ -79,9 +79,8 @@ $if(course_details)$<p>$for(course_details)$$course_details$$sep$ · $endfor$ </
 <!-- </header> -->
 <p class="author-list">
 $for(author)$
-  $if(author.last)$and $endif$<span property="author" typeof="Person">
-$author$
-$endfor$
+  <span property="author" typeof="Person">
+$if(author.name)$$author.name$</span>$endif$$if(author.affiliation)$ · $author.affiliation$$endif$ $if(author.email)$<sup><a href="mailto:$author.email$">✉</a> </sup>$endif$$sep$<br>$endfor$
 </p>
 <div class="author-affiliations">
 $for(institute)$

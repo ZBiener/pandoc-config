@@ -33,6 +33,7 @@ $endif$
 \usepackage[lastpage,user]{zref} % Provides page references
 \usepackage[svgnames]{xcolor}
 \usepackage[format=hang,labelfont=bf,labelsep=endash,font={sf,small}]{caption}
+\usepackage[letterspace=200,tracking=true]{microtype} 
 
 $if(nonumberfigures)$
 \captionsetup[figure]{labelformat=empty}% redefines the caption setup of the figures environment
@@ -84,7 +85,7 @@ $endif$
 {0em}{6.5ex plus .1ex minus .2ex}{3.4ex plus .1ex minus .2ex}
 
 
-%%%%%%%%% CUSTOMIZE QUOTE ENVIRONMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+%%%%%%%%% CUSTOMIZE QUOTE ENVIRONMENTdd %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
 
 \expandafter\def\expandafter\quote\expandafter{\quote\small\singlespacing}
 
@@ -103,23 +104,14 @@ $endif$
 }
 
 
-% (end)
-
-%%%%%%%%% MISC PANDOC-SCHOLAR OPTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
-
-
-% (end)
-
-%%%%%%%%% HYPERREF PACKAGE MUST BE LAST  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
-
 \usepackage{hyperref}
  \hypersetup{$if(title-meta)$
-            pdftitle={$title-meta$},
-$endif$
-$if(author-meta)$
-            pdfauthor={$author-meta$},
-$endif$
-    hypertexnames, 
+  pdftitle={$title-meta$},
+  $endif$
+  $if(author-meta)$
+  pdfauthor={$author-meta$},
+  $endif$
+  hypertexnames, 
  	bookmarksnumbered, 
 	breaklinks=true,
 $if(colorlinks)$
@@ -132,13 +124,7 @@ $else$
   pdfborder={0 0 0},
 $endif$
 }
-\urlstyle{same} %In bibliography, make DOI (or any URL field) use the same font as main text. The default is small caps and it makes the URL look too large.
-	
-	
-%% By default, hyperref only uses years in the authoryear format as links.
-%% Below makes the entire citation linkable.
-%% IT MAY INTERFERE WITH AUTHORTITLE
-%%
+\urlstyle{same}
 
 
 
@@ -170,6 +156,12 @@ $if(printtitle)$
 $endif$
 % (end)
 
+\makeatletter
+\newcommand\gobblepars{%
+    \@ifnextchar\par%
+        {\expandafter\gobblepars\@gobble}%
+        {}}
+\makeatother
 \noindent\gobblepars
 
 

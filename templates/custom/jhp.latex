@@ -80,8 +80,6 @@ $if(CJKmainfont)$
   \fi
 $endif$
 \fi
-% use cambria to fix some font substitution problems for e.g. ⬄
-% \newfontfamily\fixfont[Numbers=Proportional]{Cambria}
 
 $endif$
 

@@ -2,15 +2,15 @@ from: markdown
 to: latex
 pdf-engine: pdflatex
 standalone: true
-cite-method: biblatex
+cite-method: citeproc
 template: templates/custom/jhp.latex
 dpi: 300
 metadata:
   fontfamily: libertine
-  linestretch: '1.2'
+  linespacing: '1.1'
   biblio-title: References
   biblio-style: authortitle
-  biblatexoptions: 'natbib,backend=biber, backref=false, hyperref=auto, abbreviate=false, bibencoding=utf8, usetranslator=true, doi=true, isbn=false, eprint=false, citestyle=authoryear,'
+  biblatexoptions: 'natbib,backend=biber, hyperref=auto, abbreviate=false, bibencoding=utf8, usetranslator=true, doi=true, isbn=false, eprint=false, citestyle=authoryear,'
   lof: false
   toc: false
   indent: true

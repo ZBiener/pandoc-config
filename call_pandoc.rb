@@ -3,13 +3,13 @@ require 'rake'
 require 'open3'
 
 ## Define standard options
-metadata_filename = "/Users/zvb1/.pandoc/defaults/userinfo.yaml"
+metadata_filename = "/Users/zvb1/.pandoc/defaults/user_metadata.yaml"
 
 hash = {
-    "syllabus_html" 	=>   ["-d defaults -d syllabus-html --self-contained", "html"],
-    "syllabus_pdf"  	=>   ["-d defaults -d syllabus-latex --pdf-engine=xelatex --quiet", "pdf"],
-    "UC_letterhead_pdf"	=>   ["-d defaults -d UC-letterhead-latex --pdf-engine=xelatex --quiet", "pdf"],
-    "letter_pdf"	    =>   ["-d defaults -d letter --pdf-engine=xelatex --quiet", "pdf"],
+    "syllabus_html" 	=>   ["-d shared_defaults -d syllabus-html --self-contained", "html"],
+    "syllabus_pdf"  	=>   ["-d shared_defaults -d syllabus-latex --pdf-engine=xelatex --quiet", "pdf"],
+    "UC_letterhead_pdf"	=>   ["-d shared_defaults -d UC-letterhead-latex --pdf-engine=xelatex --quiet", "pdf"],
+    "letter_pdf"	    =>   ["-d shared_defaults -d letter --pdf-engine=xelatex --quiet", "pdf"],
 }
 
 ## Match the hash key with the user input, to find the required set of options

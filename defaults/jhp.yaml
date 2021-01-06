@@ -7,8 +7,12 @@ metadata:
   linespacing: '1.1'
   fontsize: '11pt'
   csl: chicago-note-bibliography.csl
+  colorlinks: true
+  mainfont: 'TeX Gyre Termes'
+  mainfontoptions: 'Mapping=tex-text, Numbers=Proportional'
+  sansfont: 'TeX Gyre Adventor'
+  sansfontoptions: 'Mapping=tex-text, Numbers=Proportional'
+  monofont: 'TeX Gyre Cursor'
+  monofontoptions: 'Scale=0.8'
+  geometry: 'margin=1.5in'
 
-
-  #postprocessors:
-  #- 'postprocessors/fixLaTeX.rb'
-  #- 'postprocessors/fixLaTeX.rb-ZB'

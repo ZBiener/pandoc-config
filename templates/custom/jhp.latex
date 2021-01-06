@@ -1,4 +1,4 @@
-% !TEX TS-program = pdflatex
+% !TEX TS-program = xelatex
 % !TEX encoding = UTF-8 Unicode
 
 \documentclass[$if(fontsize)$$fontsize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{article}
@@ -7,7 +7,32 @@ $if(geometry)$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
 
-\usepackage[oldstyle]{libertine}
+$if(fontfamily)$
+\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+$endif$
+$if(linestretch)$
+\usepackage{setspace}
+\setstretch{$linestretch$}
+$endif$
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
+\else % if luatex or xelatex
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+$for(fontfamilies)$
+  \newfontfamily{$fontfamilies.name$}[$fontfamilies.options$]{$fontfamilies.font$}
+$endfor$
+$if(mainfont)$
+    \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+$endif$
+$if(sansfont)$
+    \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
+$endif$
+$if(monofont)$
+    \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
+$endif$
 
 \usepackage{setspace}
 \setstretch{$if(linestretch)$$linestretch$$else$1.1$endif$}
@@ -33,7 +58,7 @@ $endif$
 \usepackage[lastpage,user]{zref} % Provides page references
 \usepackage[svgnames]{xcolor}
 \usepackage[format=hang,labelfont=bf,labelsep=endash,font={sf,small}]{caption}
-\usepackage[letterspace=200,tracking=true]{microtype} 
+\usepackage{xunicode}
 
 $if(nonumberfigures)$
 \captionsetup[figure]{labelformat=empty}% redefines the caption setup of the figures environment
@@ -41,22 +66,21 @@ $endif$
 
 
 %%%%%%%%% FANCY HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
-$if(draft)$
-$else$
+
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \lhead{} \rhead{} \lfoot{} \cfoot{}
 \rfoot{\footnotesize ~\thepage~of~\zpageref{LastPage}$if(footertitle)$\\$footertitle$$endif$ }
 \renewcommand{\headrulewidth}{0.0pt} 
-$endif$
+
 
 % (end)
 %%%%%%%%% SECTION TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
 
 \usepackage{titlesec}
 \titleformat{\section}[block] %command and shape
-%{\small\filcenter\addfontfeature{LetterSpace=7.0}} %for use with fontspec, instead of next line
-{\filcenter} %format
+{\small\filcenter\addfontfeature{LetterSpace=20.0}} %for use with fontspec, instead of next line
+%{\filcenter} %format
 {\oldstylenums{\thesection}.}% label
 {1em}%horizontal separation between label and title body 
 {\scshape\MakeLowercase}%code preceding the title body.
@@ -85,7 +109,10 @@ $endif$
 {0em}{6.5ex plus .1ex minus .2ex}{3.4ex plus .1ex minus .2ex}
 
 
-%%%%%%%%% CUSTOMIZE QUOTE ENVIRONMENTdd %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
+\renewenvironment{abstract}{%
+  \quotation\singlespace\scriptsize
+    \noindent {\bfseries\textsc{\MakeLowercase{\abstractname~~}}\small\normalfont}}{\endquotation}
+
 
 \expandafter\def\expandafter\quote\expandafter{\quote\small\singlespacing}
 
@@ -141,15 +168,15 @@ $if(printtitle)$
 \begin{center}
 	$if(title)$
 	\def\mytitle{$title$}
-	\huge{$if(draft)$$else$\textls[20]$endif$\mytitle}\\
+	\huge{\addfontfeature{LetterSpace=2}\mytitle}\\
 	$endif$
 	$if(subtitle)$
 	\def\mysubtitle{$subtitle$}
-	\LARGE{\textls[20]\mysubtitle}\\
+	\LARGE{\addfontfeature{LetterSpace=2}\mysubtitle}\\
 	$endif$
 	\vskip 20pt
-	$if(author)$\large{\textsc{\MakeLowercase{$for(author)$$author.name$$sep$ \and $endfor$}}}\thanksnote\\$endif$
-	$if(draft)$$else$$if(institute)$\textsc{\MakeLowercase{$institute$}}$endif$\\$endif$
+	$if(author)$\addfontfeature{LetterSpace=7}\large{\textsc{\MakeLowercase{$for(author)$$author.name$$sep$ \and $endfor$}}}\thanksnote\\$endif$
+	$if(draft)$$else$$if(institute)$\addfontfeature{LetterSpace=7}\textsc{\MakeLowercase{$institute$}}$endif$$endif$
 \end{center}
 
 \vskip 05pt
@@ -167,7 +194,7 @@ $endif$
 
 $if(abstract)$
 \begin{abstract}
-\vspace{-2em}\singlespacing\noindent\textsf{$abstract$}
+{$abstract$}
 \end{abstract}
 $endif$
 

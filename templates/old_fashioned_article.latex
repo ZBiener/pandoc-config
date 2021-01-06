@@ -43,6 +43,10 @@ $if(tables)$
 \IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
 $endif$
 
+$if(nonumberfigures)$
+\captionsetup[figure]{labelformat=empty}% redefines the caption setup of the figures environment
+$endif$
+
 $if(graphics)$
 \usepackage{graphicx,grffile}
 \makeatletter
@@ -59,11 +63,6 @@ $endif$
 \usepackage[svgnames]{xcolor}
 \usepackage[format=hang,labelfont=bf,labelsep=endash,font={sf,small}]{caption}
 \usepackage{xunicode}
-
-$if(nonumberfigures)$
-\captionsetup[figure]{labelformat=empty}% redefines the caption setup of the figures environment
-$endif$
-
 
 %%%%%%%%% FANCY HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
 
@@ -109,13 +108,11 @@ $endif$
 {0em}{6.5ex plus .1ex minus .2ex}{3.4ex plus .1ex minus .2ex}
 
 
+\expandafter\def\expandafter\quote\expandafter{\quote\small\singlespacing}
+
 \renewenvironment{abstract}{%
   \quotation\singlespace\scriptsize
     \noindent {\bfseries\textsc{\MakeLowercase{\abstractname~~}}\small\normalfont}}{\endquotation}
-
-
-\expandafter\def\expandafter\quote\expandafter{\quote\small\singlespacing}
-
 
 % (end)
 %%%%%%%%% THANKS FOOTNOTE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
@@ -154,15 +151,11 @@ $endif$
 \urlstyle{same}
 
 
-
-%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{document}
 \normalfont\normalsize
 %\thispagestyle{firstpagestyle}
 %\raggedright for no indentation on paragraphs
 
-$if(printtitle)$
 \vspace*{-0.4in}
 
 \begin{center}
@@ -180,7 +173,6 @@ $if(printtitle)$
 \end{center}
 
 \vskip 05pt
-$endif$
 % (end)
 
 \makeatletter

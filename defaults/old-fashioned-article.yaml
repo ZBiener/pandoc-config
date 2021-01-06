@@ -2,7 +2,7 @@ from: markdown
 to: latex
 pdf-engine: pdflatex
 cite-method: citeproc
-template: templates/custom/jhp.latex
+template: old-fashioned-article.latex
 metadata:
   linespacing: '1.1'
   fontsize: '11pt'

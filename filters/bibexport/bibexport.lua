@@ -1,4 +1,3 @@
--- filter from pandoc-scholar
 local utils = require 'pandoc.utils'
 local List = require 'pandoc.List'
 

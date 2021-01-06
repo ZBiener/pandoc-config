@@ -5,14 +5,14 @@ cite-method: citeproc
 template: old-fashioned-article.latex
 metadata:
   linespacing: '1.1'
-  fontsize: '11pt'
+  fontsize: '12pt'
   csl: chicago-note-bibliography.csl
   colorlinks: true
-  mainfont: 'TeX Gyre Termes'
+  mainfont: 'TeX Gyre Schola'
   mainfontoptions: 'Mapping=tex-text, Numbers=Proportional'
   sansfont: 'TeX Gyre Adventor'
   sansfontoptions: 'Mapping=tex-text, Numbers=Proportional'
   monofont: 'TeX Gyre Cursor'
   monofontoptions: 'Scale=0.8'
   geometry: 'margin=1.5in'
-
+#  thanks:

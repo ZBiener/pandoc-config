@@ -1,6 +1,9 @@
 % !TEX TS-program = xelatex
 % !TEX encoding = UTF-8 Unicode
 
+
+
+
 \documentclass[$if(fontsize)$$fontsize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{article}
 
 $if(geometry)$
@@ -10,10 +13,7 @@ $endif$
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 $endif$
-$if(linestretch)$
-\usepackage{setspace}
-\setstretch{$linestretch$}
-$endif$
+
 \usepackage{ifxetex,ifluatex}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
@@ -35,16 +35,12 @@ $if(monofont)$
 $endif$
 
 \usepackage{setspace}
-\setstretch{$if(linestretch)$$linestretch$$else$1.1$endif$}
+\setstretch{$if(linespacing)$$linespacing$$else$1.1$endif$}
 
 $if(tables)$
 \usepackage{longtable,booktabs}
 % Fix footnotes in tables (requires footnote package)
 \IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
-$endif$
-
-$if(nonumberfigures)$
-\captionsetup[figure]{labelformat=empty}% redefines the caption setup of the figures environment
 $endif$
 
 $if(graphics)$
@@ -60,11 +56,15 @@ $if(graphics)$
 $endif$
 
 \usepackage[lastpage,user]{zref} % Provides page references
+
+$if(colorlinks)$
 \usepackage[svgnames]{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+$endif$
+
 \usepackage[format=hang,labelfont=bf,labelsep=endash,font={sf,small}]{caption}
 \usepackage{xunicode}
-
-%%%%%%%%% FANCY HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -72,13 +72,9 @@ $endif$
 \rfoot{\footnotesize ~\thepage~of~\zpageref{LastPage}$if(footertitle)$\\$footertitle$$endif$ }
 \renewcommand{\headrulewidth}{0.0pt} 
 
-
-% (end)
-%%%%%%%%% SECTION TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% (fold)
-
 \usepackage{titlesec}
 \titleformat{\section}[block] %command and shape
-{\small\filcenter\addfontfeature{LetterSpace=20.0}} %for use with fontspec, instead of next line
+{\normalsize\filcenter\addfontfeature{LetterSpace=20.0}} %for use with fontspec, instead of next line
 %{\filcenter} %format
 {\oldstylenums{\thesection}.}% label
 {1em}%horizontal separation between label and title body 
@@ -98,7 +94,7 @@ $endif$
 \makeatother
 
 \titleformat{\subsection}[hang]
-{\normalfont}
+{\normalfont\normalsize}
 {\oldstylenums{\thesubsection}.}
 {1em}
 {\textit}
@@ -126,7 +122,28 @@ $endif$
   \addtocounter{footnote}{-1}%
   \endgroup
 }
-
+$if(csl-refs)$
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+$endif$
 
 \usepackage{hyperref}
  \hypersetup{$if(title-meta)$
@@ -161,15 +178,16 @@ $endif$
 \begin{center}
 	$if(title)$
 	\def\mytitle{$title$}
-	\huge{\addfontfeature{LetterSpace=2}\mytitle}\\
+	\huge{\mytitle}\\
 	$endif$
 	$if(subtitle)$
 	\def\mysubtitle{$subtitle$}
-	\LARGE{\addfontfeature{LetterSpace=2}\mysubtitle}\\
+	\LARGE{\mysubtitle}\\
 	$endif$
 	\vskip 20pt
-	$if(author)$\addfontfeature{LetterSpace=7}\large{\textsc{\MakeLowercase{$for(author)$$author.name$$sep$ \and $endfor$}}}\thanksnote\\$endif$
-	$if(draft)$$else$$if(institute)$\addfontfeature{LetterSpace=7}\textsc{\MakeLowercase{$institute$}}$endif$$endif$
+	$if(author)$\addfontfeature{LetterSpace=7}\normalsize{\textsc{\MakeLowercase{$for(author)$$author.name$$sep$ \and $endfor$}}}\thanksnote\\
+	\addfontfeature{LetterSpace=7}\textsc{\MakeLowercase{$for(author)$$author.affiliation$$sep$ \and $endfor$}}
+  $endif$
 \end{center}
 
 \vskip 05pt

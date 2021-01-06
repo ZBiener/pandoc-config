@@ -8,7 +8,7 @@ resource-path:
 citeproc: true
 cite-method: citeproc
 filters:
-  - /Users/zvb1/.pandoc/filters/pagebreak.lua 
+  - /Users/zvb1/.pandoc/filters/pagebreak/pagebreak.lua 
 
 metadata:
   reference-links: true

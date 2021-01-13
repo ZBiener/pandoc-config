@@ -1,21 +1,20 @@
 from: markdown+raw_tex+simple_tables+escaped_line_breaks
 to: latex
-template: /Users/zvb1/.pandoc/templates/UC_letterhead.latex
+template: templates/UC_letterhead.latex
 metadata:
   #opening: To whom it may concern,
-  closing: Sincerely,
+  closing: "Sincerely,"
   firstpagefooter: "An affirmative action/equal opportunity institution"
   letterhead: "/Users/zvb1/.pandoc/images/UCIDPrimaryBlackRed.pdf"
   wallpaperXoffset: 1in #usually the same as the margins set in geometry metadata
   wallpaperYoffset: 1in #usually the same as the margins set in geometry metadata
-  headerfont: 'Open Sans'
   papersize: letter
   geometry: ['margin=1in, bottom=1.1in']
   mainfont: 'TeX Gyre Pagella'
   mainfontoptions: 'Numbers=OldStyle, Numbers=Proportional'
+  sansfont: 'Open Sans'
+  sansfontoptions: 'Numbers=Proportional'
   monofont: 'Fira Code'
-  mathfont: 'Cambria Math'
-  mathfontoptions: 'math-style=ISO,bold-style=ISO'
   fontsize: '12pt'
   linestretch: '1.1'
   signature-before: -6ex

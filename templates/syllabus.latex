@@ -176,7 +176,6 @@ $endif$
 \newline\footnotesize\texttt{\href{mailto:$author.email$}{$author.email$}}$sep$\newline$endfor$}
 \date{}
 \maketitle
-
 % Create modern layout: no indent, larger paragraph separation, 1.2 line spacing. 
 % Use with case. PANDOC's CSLReferences environment inherits these settings, and
 % must be modified with any template updates.

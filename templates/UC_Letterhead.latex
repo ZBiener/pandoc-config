@@ -24,10 +24,12 @@ $if(colorlinks)$
 $endif$
 %
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$else$a4paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{letter}
+
+$if(geometry)$
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+$endif$
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
-$else$
-\usepackage{lmodern}
 $endif$
 $if(linestretch)$
 \usepackage{setspace}
@@ -54,43 +56,16 @@ $for(fontfamilies)$
   \newfontfamily{$fontfamilies.name$}[$fontfamilies.options$]{$fontfamilies.font$}
 $endfor$
 $if(mainfont)$
-    \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+  \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
 $endif$
 $if(sansfont)$
-    \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
+  \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
 $endif$
 $if(monofont)$
-    \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
-$endif$
-$if(mathfont)$
-$if(mathspec)$
-  \ifxetex
-    \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
-  \else
-    \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
-  \fi
-$else$
-  \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
-$endif$
-$endif$
-$if(CJKmainfont)$
-  \ifxetex
-    \usepackage{xeCJK}
-    \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
-  \fi
-$endif$
-$if(luatexjapresetoptions)$
-  \ifluatex
-    \usepackage[$for(luatexjapresetoptions)$$luatexjapresetoptions$$sep$,$endfor$]{luatexja-preset}
-  \fi
-$endif$
-$if(CJKmainfont)$
-  \ifluatex
-    \usepackage[$for(luatexjafontspecoptions)$$luatexjafontspecoptions$$sep$,$endfor$]{luatexja-fontspec}
-    \setmainjfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
-  \fi
+  \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
 $endif$
 \fi
+
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
@@ -116,29 +91,26 @@ $endif$
 \usepackage{hyperref}
 \hypersetup{
 $if(title-meta)$
-            pdftitle={$title-meta$},
+  pdftitle={$title-meta$},
 $endif$
 $if(author-meta)$
-            pdfauthor={$author-meta$},
+  pdfauthor={$author-meta$},
 $endif$
 $if(keywords)$
-            pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
+  pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
 $endif$
 $if(colorlinks)$
-            colorlinks=true,
-            linkcolor=$if(linkcolor)$$linkcolor$$else$Maroon$endif$,
-            citecolor=$if(citecolor)$$citecolor$$else$Blue$endif$,
-            urlcolor=$if(urlcolor)$$urlcolor$$else$Blue$endif$,
+  colorlinks=true,
+  linkcolor=$if(linkcolor)$$linkcolor$$else$Maroon$endif$,
+  citecolor=$if(citecolor)$$citecolor$$else$Blue$endif$,
+  urlcolor=$if(urlcolor)$$urlcolor$$else$Blue$endif$,
 $else$
-            pdfborder={0 0 0},
+  pdfborder={0 0 0},
 $endif$
-            breaklinks=true}
+  breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 $if(verbatim-in-note)$
 \VerbatimFootnotes % allows verbatim text in footnotes
-$endif$
-$if(geometry)$
-\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
 
 $if(listings)$
@@ -155,17 +127,6 @@ $if(tables)$
 \usepackage{longtable,booktabs}
 % Fix footnotes in tables (requires footnote package)
 \IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
-$endif$
-$if(graphics)$
-\usepackage{graphicx}
-\makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 $endif$
 $if(links-as-notes)$
 % Make links footnotes instead of hotlinks:
@@ -202,57 +163,51 @@ $endif$
 \def\fps@figure{htbp}
 \makeatother
 
-$if(signature)$
+
 \usepackage{graphicx}
-\signature{$if(signature-before)$\vspace*{$signature-before$}$endif$\includegraphics$if(signature-width)$[width=$signature-width$]$endif${$signature$}$if(author)$\\$if(signature-after)$\vspace*{$signature-after$}$endif$$for(author)$$author$$sep$\\$endfor$\\$if(jobtitle)$$for(jobtitle)$$jobtitle$$sep$\\$endfor$$endif$$if(external)$\\$affiliation$$endif$$endif$\vspace*{4ex}}
-$else$
-$if(author)$
-\signature{$for(author)$$author$$sep$\\$endfor$\\\\$if(jobtitle)$$for(jobtitle)$$jobtitle$$sep$\\$endfor$$endif$\vspace*{4ex}}
-$endif$
-$endif$
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
+
+\signature{$if(signature-before)$\vspace*{$signature-before$}$endif$
+  \includegraphics$if(signature-width)$[width=$signature-width$]$endif$
+    $for(author)$
+      $if(author.signature)${$author.signature$}\\$endif$
+      $if(signature-after)$\vspace*{$signature-after$}$endif$
+      $if(author.name)$$author.name$\\$endif$
+      $if(author.jobtitle)$$author.jobtitle$\\$endif$
+      $if(external)$$author.affiliation$\\$endif$
+    $endfor$
+    \vspace*{4ex}
+}
 
 $if(date)$
-\date{$if(headerfont)$\fontspec{$headerfont$}$endif$$date$}
-$endif$
-
-$for(header-includes)$
-$header-includes$
-$endfor$
-$if(lang)$
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
-$if(babel-newcommands)$
-  $babel-newcommands$
-$endif$
-\else
-  % load polyglossia as late as possible as it *could* call bidi if RTL lang (e.g. Hebrew or Arabic)
-  \usepackage{polyglossia}
-  \setmainlanguage[$polyglossia-lang.options$]{$polyglossia-lang.name$}
-$for(polyglossia-otherlangs)$
-  \setotherlanguage[$polyglossia-otherlangs.options$]{$polyglossia-otherlangs.name$}
-$endfor$
-\fi
-$endif$
-$if(dir)$
-\ifxetex
-  % load bidi as late as possible as it modifies e.g. graphicx
-  $if(latex-dir-rtl)$
-  \usepackage[RTLdocument]{bidi}
-  $else$
-  \usepackage{bidi}
-  $endif$
-\fi
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \TeXXeTstate=1
-  \newcommand{\RL}[1]{\beginR #1\endR}
-  \newcommand{\LR}[1]{\beginL #1\endL}
-  \newenvironment{RTL}{\beginR}{\endR}
-  \newenvironment{LTR}{\beginL}{\endL}
-\fi
+\date{\sffamily $date$}
 $endif$
 
 \address{
-\\$for(return-address)$$if(headerfont)$\fontspec{$headerfont$}$endif$$return-address$$sep$\\$endfor$\\$for(correspondence)$$if(headerfont)$\fontspec{$headerfont$}$endif$\href{mailto:$correspondence$}{$correspondence$}$sep$\\$endfor$\\$for(phone)$$if(headerfont)$\fontspec{$headerfont$}$endif$$phone$$sep$\\$endfor$}
+  $for(author)$
+  $if(author.return-address)$
+    $for(author.return-address)$
+    \sffamily $author.return-address[0]$$sep$\\
+    $endfor$\\
+  $endif$
+  $if(author.correspondence)$
+  \sffamily\href{mailto:$author.correspondence$}{$author.correspondence$}\\
+  $endif$
+  $if(author.email)$
+  \sffamily\href{mailto:$author.email$}{$author.email$}\\
+  $endif$
+  $if(author.phone)$
+  \sffamily $author.phone$
+  $endif$
+  $endfor$}
 
 
 $if(blockquote)$
@@ -290,7 +245,6 @@ $endif$
   \def\@texttop{}
 \makeatother
 
-%Letter class vertically centers text on the first page. The following code removes that.
 
 \makeatletter
 \renewcommand*{\cc}[1]{%
@@ -306,7 +260,6 @@ $endif$
     \ignorespaces #1\strut}\par}
 \makeatother
 
-
 %Add custom UC footer
 $if(firstpagefooter)$
 \makeatletter
@@ -315,24 +268,7 @@ $if(firstpagefooter)$
 $endif$
 
 \begin{document}
-
-
-
 \setstretch{1}
-$for(include-before)$
-$include-before$
-$endfor$
-$if(toc)$
-{
-$if(colorlinks)$
-\hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$$endif$}
-$endif$
-\setcounter{tocdepth}{$toc-depth$}
-\tableofcontents
-}
-$endif$
-
-
 \begin{letter}{$for(address)$$address$$sep$\\$endfor$$if(subject)$\\ ~ \\$subject$$endif$}
 \opening{$opening$}
 $if(linestretch)$
@@ -359,7 +295,6 @@ $endif$
 $if(ps)$
 \ps{$ps$}
 $endif$
-
 \end{letter}
 
 $if(natbib)$

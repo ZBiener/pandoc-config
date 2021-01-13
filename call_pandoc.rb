@@ -3,7 +3,7 @@ require 'rake'
 require 'open3'
 
 ## Define standard options
-metadata_filename = "/Users/zvb1/.pandoc/defaults/user_metadata.yaml"
+metadata_filename = "/Users/zvb1/.pandoc/defaults/user-metadata.yaml"
 
 hash = {
     "syllabus_html" 	=>   ["-d shared-defaults -d syllabus-html --self-contained", "html"],

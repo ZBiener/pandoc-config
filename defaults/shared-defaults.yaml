@@ -1,14 +1,9 @@
 standalone: true
 verbosity: INFO # verbose by default
-resource-path: 
-  - .
-  - /Users/zvb1/.pandoc/
-  - /Users/zvb1/.pandoc/templates/
-
 citeproc: true
 cite-method: citeproc
 filters:
-  - /Users/zvb1/.pandoc/filters/pagebreak/pagebreak.lua 
+  - filters/pagebreak/pagebreak.lua 
 
 metadata:
   reference-links: true

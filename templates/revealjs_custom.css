@@ -35,9 +35,8 @@ figcaption {
 }
 
 
-/**************
- weird changes to allow scrolling in nap and individual slides. Highly breakable. It is easiest to keep scolling on individual slides only, and disable the map view. The n-th child is probably not needed
-
+ /* weird changes to allow scrolling in nap and individual slides. Highly breakable. It is easiest to keep scolling on individual slides only, and disable the map view. The n-th child is probably not needed */
+/* 
 div.overview > .slides section:nth-child(3)  {
     background: red;
     overflow-y: hidden;
@@ -54,20 +53,20 @@ div:not(.overview) > .slides section:nth-child(3)  {
 
 div:not(.overview) > .slides section:nth-child(3)::-webkit-scrollbar {
     display: none;
-}
-
-*/
-
-
-/* Scrolling in map */
-/* div.overview section .slide   {
-    overflow-y: auto !important;
-    pointer-events: auto !important;
 } */
 
 
+
+
+/* Scrolling in map */
+div.overview section .slide   {
+    overflow-y: auto !important;
+    pointer-events: auto !important;
+}
+
+
 /* Scrolling in individual slides, with odd selectors so not to break map layout */
-/* body.reveal-viewport div.reveal.fade.center.focused.has-horizontal-slides.ready:not(.overview) div.slides {
+body.reveal-viewport div.reveal.fade.center.focused.has-horizontal-slides.ready:not(.overview) div.slides {
     overflow-y: scroll ;
     pointer-events: auto;
     -ms-overflow-style: none;  /* IE and Edge */
@@ -83,7 +82,7 @@ html.reveal-full-page body.reveal-viewport div.reveal.fade.center.focused.has-ve
     pointer-events: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-} */
+} 
 
 
 

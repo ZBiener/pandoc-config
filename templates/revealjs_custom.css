@@ -1,10 +1,9 @@
 
 .reveal h1 {
-  font-size: 2.3em; }
-
+  font-size: 2em; }
 
 .reveal h2 {
-  font-size: 1.7em; }  
+  font-size: 1.4em; }  
 
 .reveal pre code {
   display: block;
@@ -27,8 +26,12 @@
   font-family: monospace;
   }
 
-.reveal .slides {
+/* .reveal .slides {
   text-align: left;
+} */
+
+figcaption {
+  display: none;
 }
 
 
@@ -57,22 +60,19 @@ div:not(.overview) > .slides section:nth-child(3)::-webkit-scrollbar {
 
 
 /* Scrolling in map */
-div.overview section .slide   {
+/* div.overview section .slide   {
     overflow-y: auto !important;
     pointer-events: auto !important;
-}
+} */
 
 
 /* Scrolling in individual slides, with odd selectors so not to break map layout */
-body.reveal-viewport div.reveal.fade.center.focused.has-horizontal-slides.ready:not(.overview) div.slides {
-      overflow-y: scroll ;
+/* body.reveal-viewport div.reveal.fade.center.focused.has-horizontal-slides.ready:not(.overview) div.slides {
+    overflow-y: scroll ;
     pointer-events: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
-
-
-
 
 body.reveal-viewport div.reveal.fade.center.focused.has-vertical-slides.has-horizontal-slides.ready div.slides::-webkit-scrollbar {
     display: none;
@@ -83,7 +83,8 @@ html.reveal-full-page body.reveal-viewport div.reveal.fade.center.focused.has-ve
     pointer-events: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-}
+} */
+
 
 
 

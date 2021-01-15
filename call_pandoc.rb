@@ -4,23 +4,26 @@ require 'open3'
 
 ## Define standard options
 metadata_filename = "/Users/zvb1/.pandoc/defaults/user-metadata.yaml"
+local_defaults_filename = 'local-defaults'
 
 hash = {
-    "syllabus_html" 	=>   ["-d shared-defaults -d syllabus-html --self-contained", "html"],
-    "syllabus_pdf"  	=>   ["-d shared-defaults -d syllabus-latex --pdf-engine=xelatex --quiet", "pdf"],
-    "UC_letterhead_pdf"	=>   ["-d shared-defaults -d UC-letterhead-latex --pdf-engine=xelatex --quiet", "pdf"],
-    "letter_pdf"	    =>   ["-d shared-defaults -d letter --pdf-engine=xelatex --quiet", "pdf"],
-    "old_fashioned"	    =>   ["-d shared-defaults -d old-fashioned-article --pdf-engine=xelatex --quiet", "pdf"],
+    "handout"    	=>   ["-d local-defaults -d pandoc-scholar-html -d course-handout-html --self-contained", "html"],
+    "syllabus"  	=>   ["-d local-defaults -d formal-syllabus-latex --pdf-engine=xelatex --quiet", "pdf"],
+    "UC_letterhead"	=>   ["-d local-defaults -d UC-letterhead-latex --pdf-engine=xelatex --quiet", "pdf"],
+    "letter"	    =>   ["-d local-defaults -d letter --pdf-engine=xelatex --quiet", "pdf"],
+    "old_fashioned"	=>   ["-d local-defaults -d old-fashioned-article --pdf-engine=xelatex --quiet", "pdf"],
+    "reveal"        =>   ["-d local-defaults -d reveal-js", "html"],
+    "scholar_html"  =>    ["-d local-defaults -d pandoc-scholar-html --self-contained", "html"],
 }
 
 ## Match the hash key with the user input, to find the required set of options
 options, extension = hash.fetch($*[0])
-
-output_filename = File.join(File.dirname($*[1]), File.basename($*[1])).ext(extension)
+base_directory = File.dirname($*[1])
+output_filename = File.join(base_directory, File.basename($*[1])).ext(extension)
 
 ## Construct command
 
-command = "pandoc --metadata-file=\"#{metadata_filename}\" #{options}  --output \"#{output_filename}\" \"#{$*[1]}\""
+command = "pandoc --metadata-file=\"#{metadata_filename}\" #{options} --output \"#{output_filename}\" \"#{$*[1]}\""
 
 ## Run command
 puts command

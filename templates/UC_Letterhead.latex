@@ -1,9 +1,22 @@
 % !TEX program = xelatex
 % !TEX encoding = UTF-8 Unicode
 
-% see https://github.com/aaronwolen/pandoc-letter
-%   address : Name and address of the recipient; takes a list for a multi-line address.
-%   author : Writer of the letter; can take a list for a multi-line signature.
+%  based on https://github.com/aaronwolen/pandoc-letter
+%  takes authors information in structured format, e.g.:
+%
+%  author:
+%  - name: 
+%    affiliation: 
+%    email: 
+%    jobtitle: 
+%    phone: 
+%    return-address:
+%      - line 1
+%      - line 3
+%    signature: filename.jpg
+%
+%   other options:
+%   signature-before, signature-after : Allows adjustment of vertical space surrounding signature.
 %   blockquote : Changes style of block quotations to match bootstrap (requires the mdframed package).
 %   cc : Recipients to be carbon-copied; can take a list for multiple recipients.
 %   closing : Text for the complementary close.
@@ -13,16 +26,14 @@
 %   letterhead : Image file to be used as letterhead (requires the wallpaper package), applied only to the first page.
 %   opening : Text for the salutation.
 %   ps : Text to be added at the end of the letter as a postscript.
-%   return-address : Address of the sender: takes a list to allow a multi-line address.
-%   signature : Image file for a signature.
-%   signature-before, signature-after : Allows adjustment of vertical space surrounding signature.
+
 
 \PassOptionsToPackage{unicode=true$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref} % options for packages loaded elsewhere
 \PassOptionsToPackage{hyphens}{url}
 $if(colorlinks)$
 \PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 $endif$
-%
+
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$else$a4paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{letter}
 
 $if(geometry)$

@@ -1,14 +1,16 @@
 from: markdown
 to: revealjs
-toc: true
-css: templates/custom/revealjs_custom.css
+toc: false
+template: /Users/zvb1/.pandoc/templates/revealjs.html
+css: /Users/zvb1/.pandoc/templates/revealjs_custom.css
 self-contained: true
 metadata:
-  revealjs-url: /Users/zvb1/Programming/reveal.js
+  revealjs-url: /Users/zvb1/Git/reveal.js
   slideNumber: true
   transition: fade # none/fade/slide/convex/concave/zoom
   transitionSpeed: default # default/fast/slow
   progress: true
-  theme: sky
+  theme: solarized
+  center: false
   numbers: true
   minscale: 0.1

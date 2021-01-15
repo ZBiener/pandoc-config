@@ -74,9 +74,8 @@ $if(subtitle)$
 <p property="alternativeHeadline" class="subtitle">$subtitle$</p>
 $endif$
 
-$if(course_details)$<p>$for(course_details)$$course_details$$sep$ · $endfor$ </p>$endif$
-
 <!-- </header> -->
+$if(course_details)$<p class="course_details">$for(course_details)$$course_details$$sep$ · $endfor$ </p>$endif$
 <p class="author-list">
 $for(author)$
   <span property="author" typeof="Person">
@@ -100,6 +99,8 @@ $endfor$
     </div>
     $endif$
 </div>
+<br>
+
 $if(abstract)$<p class="abstract" property="description">$abstract$</p>$endif$
 $if(doi)$<p><a href="https://doi.org/$doi$">doi: $doi$</a></p>$endif$
 

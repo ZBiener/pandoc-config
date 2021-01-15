@@ -1,9 +1,9 @@
 from: markdown+multiline_tables
 to: html
-filters:
-  - filters/gather_course_metadata.lua 
 template: 'templates/pandoc-scholar.html'
-css: 'templates/pandoc-scholar.css'
+css: 
+  - 'templates/pandoc-scholar.css'
+  - 'templates/pandoc-scholar-customization.css'
 metadata:
   csl: chicago-syllabus.csl
 

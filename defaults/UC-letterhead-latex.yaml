@@ -10,8 +10,8 @@ metadata:
   wallpaperYoffset: 1in #usually the same as the margins set in geometry metadata
   papersize: letter
   geometry: ['margin=1in, bottom=1.1in']
-  mainfont: 'TeX Gyre Pagella'
-  mainfontoptions: 'Numbers=OldStyle, Numbers=Proportional'
+  mainfont: 'Minion Pro'
+  mainfontoptions: 'Numbers=Proportional'
   sansfont: 'Open Sans'
   sansfontoptions: 'Numbers=Proportional'
   monofont: 'Fira Code'

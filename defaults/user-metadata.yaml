@@ -2,9 +2,13 @@ author:
 - name: Zvi Biener
   affiliation: University of Cincinnati
   email: zvi.biener@uc.edu
-  jobtitle: Associate Professor
+  jobtitle: |
+    Editor-in-Chief, *PhilSci-Archive*\newline
+    Vice-President and President-Elect, *International Society for the History of Philosophy of Science*\newline
+    Associate Professor, University of Cincinnati \newline
   phone: 513-818-2984
   return-address:
+    - "**Zvi Biener**"
     - "**Department of Philosophy**"
     - "**Arts & Sciences**"
     - ML 0374

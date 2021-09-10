@@ -1,9 +1,10 @@
 from: markdown
 to: revealjs
 toc: false
-template: /Users/zvb1/.pandoc/templates/revealjs.html
 css: /Users/zvb1/.pandoc/templates/revealjs_custom.css
 self-contained: true
+filters:
+    - flatten_metadata_for_first_author.lua 
 metadata:
   revealjs-url: /Users/zvb1/Git/reveal.js
   slideNumber: true

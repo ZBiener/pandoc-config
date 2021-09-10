@@ -1,0 +1,17 @@
+from: markdown+multiline_tables
+to: latex
+filters:
+  - gather_course_metadata.lua 
+template: bib_list.latex 
+standalone: true
+metadata:
+  reference-section-title: Bibliography
+  csl: chicago-author-date.csl
+  mainfont: 'Bembo Std'
+  mainfontoptions: 'Mapping=tex-text, Numbers=Proportional'
+  sansfont: 'Myriad Pro SemiExtended'
+  sansfontoptions: 'Mapping=tex-text, Numbers=Proportional'
+  monofont: 'TeX Gyre Cursor'
+  monofontoptions: 'Scale=0.8'
+  colorlinks: true
+  geometry: 'margin=0.97in, top=0.8in, bottom=0.9in'

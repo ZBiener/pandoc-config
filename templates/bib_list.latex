@@ -1,0 +1,188 @@
+% !TEX program = xelatex
+% !TEX encoding = UTF-8 Unicode
+
+
+\documentclass[11pt,article,oneside]{memoir}
+$if(geometry)$
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+$endif$
+\usepackage{xunicode}
+\usepackage{url}
+\usepackage[american]{babel}
+\usepackage[babel]{csquotes}
+\usepackage[svgnames]{xcolor}
+\usepackage{etoolbox}
+\usepackage{longtable,booktabs}
+\AtBeginEnvironment{longtable}{\sffamily\renewcommand*{\arraystretch}{2}}
+\usepackage{multirow}
+\usepackage{calc}
+\usepackage{amssymb}
+\usepackage{pifont}
+\usepackage{newunicodechar}
+\newunicodechar{✓}{\ding{51}}
+\newunicodechar{✗}{\ding{55}}
+\usepackage{textualicomma}
+
+
+$if(fontfamily)$
+\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+$endif$
+$if(linestretch)$
+\usepackage{setspace}
+\setstretch{$linestretch$}
+$endif$
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
+\else % if luatex or xelatex
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+$for(fontfamilies)$
+  \newfontfamily{$fontfamilies.name$}[$fontfamilies.options$]{$fontfamilies.font$}
+$endfor$
+$if(mainfont)$
+    \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+$endif$
+$if(sansfont)$
+    \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
+$endif$
+$if(monofont)$
+    \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
+$endif$
+
+
+
+
+
+% Title
+\pretitle{\begin{flushleft}\LARGE\sffamily\bfseries\noindent}
+%\posttitle{\end{flushleft}\par\vskip 2.5em}
+%\preauthor{\begin{flushleft}\Large\sffamily}
+%\postauthor{\end{flushleft}}
+%\predate{\begin{flushleft}\sffamily\footnotesize\vspace{0.9em}}
+%\postdate{\end{flushleft}\par\vskip 2em}
+
+% Remove top and bottom rules from longtables
+\setlength{\aboverulesep}{0pt}
+\setlength{\belowrulesep}{0pt}
+\setlength\heavyrulewidth{0pt}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {\normalfont\sffamily\bfseries}
+  {}{0em}{}
+
+\titlespacing*{\section}
+{0em}%increases the left margin,
+{2.5ex plus .1ex minus .2ex}%is the vertical space before the title.
+{0em}%is the separation between title and text—vertical with hang, block, and display,  
+
+% Fix for pandoc references class
+$if(csl-refs)$
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+ \setcounter{page}{1}
+  \setlength{\parindent}{0pt}
+  Primary sources include Newton's correspondence, writings, and manuscripts, as well as works and correspondence by Leibniz, Huygens, Locke, Descartes and Newton's followers: John Keill, William Whiston, Henry Pemberton, and Colin Maclaurin. 
+  They are published or available digitally in the public domain or through Cambridge University Libraries. Secondary sources include:
+  % return to tight default paragraph spacing, with extra space to offet beginning
+  \vspace{2.5ex}
+  \linespread{.95}
+  \selectfont
+
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+
+ }%
+
+
+\usepackage{siunitx}
+\sisetup{group-separator = {\,}}
+
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+$endif$
+$if(csquotes)$
+\usepackage{csquotes}
+$endif$
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+% Clear the header and footer
+\fancyhead{}
+\fancyfoot{}
+% Set the right side of the footer to be the page number
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0.0pt} 
+
+\makeatletter
+\newcommand\iraggedright{%
+  \let\\\@centercr\@rightskip\@flushglue \rightskip\@rightskip
+  \leftskip\z@skip}
+\makeatother
+
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=*}
+
+
+\usepackage{hyperref}
+\hypersetup{
+$if(title-meta)$
+            pdftitle={$title-meta$},
+$endif$
+$if(author)$
+            pdfauthor={$for(author)$$author.name$$sep$, $endfor$},
+$endif$
+$if(subject)$
+            pdfsubject={$subject$},
+$endif$
+$if(keywords)$
+            pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
+$endif$
+$if(colorlinks)$
+            colorlinks=true,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$DarkRed$endif$,
+            filecolor=$if(filecolor)$$filecolor$$else$DarkRed$endif$,
+            citecolor=$if(citecolor)$$citecolor$$else$DarkRed$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$DarkRed$endif$,
+$else$
+            pdfborder={0 0 0},
+$endif$
+            breaklinks=true}
+
+%\urlstyle{same}
+
+\begin{document} 
+\linespread{1.1}
+
+\Large\sffamily\bfseries\noindent{$title$}
+
+\setlength{\parindent}{.5in}
+\normalfont\normalsize\noindent Zvi Biener \vspace{1ex} 
+%\author{$for(author)$$author.name$%\vspace{1ex} 
+%\newline\small{$author.affiliation$}
+%\vspace{.1ex} 
+%\newline\footnotesize\texttt{\href{mailto:$author.email$}{$author.email$}}$sep$\newline$endfor$}
+%\date{}
+% Create modern layout: no indent, larger paragraph separation, 1.2 line spacing. 
+% Use with case. PANDOC's CSLReferences environment inherits these settings, and
+% must be modified with any template updates.
+\normalfont\normalsize
+
+\setlength{\parskip}{0\baselineskip}
+$body$
+
+
+\end{document}

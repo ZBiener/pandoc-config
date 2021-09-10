@@ -14,6 +14,9 @@ hash = {
     "old_fashioned"	=>   ["-d local-defaults -d old-fashioned-article --pdf-engine=xelatex --quiet", "pdf"],
     "reveal"        =>   ["-d local-defaults -d reveal-js", "html"],
     "scholar_html"  =>    ["-d local-defaults -d pandoc-scholar-html --self-contained", "html"],
+    "simple" =>   ["-d local-defaults -d simple --pdf-engine=xelatex --quiet", "pdf" ],
+    "bib_list" =>   ["-d local-defaults -d bib_list --pdf-engine=xelatex --quiet", "pdf" ],
+
 }
 
 ## Match the hash key with the user input, to find the required set of options

@@ -58,14 +58,15 @@ div:not(.overview) > .slides section:nth-child(3)::-webkit-scrollbar {
 
 
 
-/* Scrolling in map */
-div.overview section .slide   {
+/* Scrolling in map - broken */
+/* div.overview section .slide   {
     overflow-y: auto !important;
     pointer-events: auto !important;
-}
+} */
 
 
 /* Scrolling in individual slides, with odd selectors so not to break map layout */
+/* ONLY HIDES SCROLL BARS IN FIREFOX. */
 body.reveal-viewport div.reveal.fade.center.focused.has-horizontal-slides.ready:not(.overview) div.slides {
     overflow-y: scroll ;
     pointer-events: auto;

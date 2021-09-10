@@ -188,15 +188,13 @@ $endif$
 
 \signature{$if(signature-before)$\vspace*{$signature-before$}$endif$
   \includegraphics$if(signature-width)$[width=$signature-width$]$endif$
-    $for(author)$
-      $if(author.signature)${$author.signature$}\\$endif$
+  $for(author)$$if(author.signature)${$author.signature$}$endif$$endfor$\newline
+  \parbox[t]{\textwidth}{$for(author)$
       $if(signature-after)$\vspace*{$signature-after$}$endif$
-      $if(author.name)$$author.name$\\$endif$
-      $if(author.jobtitle)$$author.jobtitle$\\$endif$
-      $if(external)$$author.affiliation$\\$endif$
-    $endfor$
-    \vspace*{4ex}
-}
+      $if(author.name)$$author.name$\newline$endif$
+      $if(author.jobtitle)$$author.jobtitle$\newline$endif$
+      %$if(external)$$if(author.affiliation)$$author.affiliation$\newline$endif$$endif$
+      $endfor$\vspace*{4ex}}}
 
 $if(date)$
 \date{\sffamily $date$}

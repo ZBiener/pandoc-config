@@ -6,7 +6,6 @@ course_metadata = {
     "term",
     "time",
     "room",
-    "office_hours"
 }
 
 function Meta(m)

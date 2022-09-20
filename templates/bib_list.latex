@@ -29,7 +29,7 @@ $if(fontfamily)$
 $endif$
 $if(linestretch)$
 \usepackage{setspace}
-\setstretch{$linestretch$}
+%\setstretch{$linestretch$}
 $endif$
 \usepackage{ifxetex,ifluatex}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex

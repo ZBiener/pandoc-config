@@ -3,10 +3,13 @@
 
 
 \def\mytitle{{\small \MakeUppercase{
-  $if(course_details)$ $for(course_details)$ $course_details$ $sep$ · $endfor$ $endif$
+  $if(course_details)$ $for(course_details)$ $course_details$ $sep$ · $endfor$ $endif$ $if(office_hours)$\newline Office Hours: $office_hours$ · A\&S Hall 259D$endif$
 }
 \newline\vskip .5em } \HUGE $title$}
 
+\def\officehours{{
+  $if(office_hours)$$office_hours$$endif$
+}}
 
 \documentclass[12pt,article,oneside]{memoir}
 $if(geometry)$
@@ -35,7 +38,7 @@ $if(fontfamily)$
 $endif$
 $if(linestretch)$
 \usepackage{setspace}
-\setstretch{$linestretch$}
+%\setstretch{$linestretch$}
 $endif$
 \usepackage{ifxetex,ifluatex}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
@@ -172,8 +175,8 @@ $endif$
 \title{\LARGE \mytitle}
 \author{$for(author)$$author.name$%\vspace{1ex} 
 %\newline\small{$author.affiliation$}
-%\vspace{.1ex} 
-\newline\footnotesize\texttt{\href{mailto:$author.email$}{$author.email$}}$sep$\newline$endfor$}
+\newline\normalsize\texttt{\href{mailto:$author.email$}{$author.email$}}$sep$\newline$endfor$
+}
 \date{}
 \maketitle
 % Create modern layout: no indent, larger paragraph separation, 1.2 line spacing. 

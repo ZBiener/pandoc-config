@@ -145,6 +145,10 @@ $if(csl-refs)$
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 $endif$
 
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+  
 \usepackage{hyperref}
  \hypersetup{$if(title-meta)$
   pdftitle={$title-meta$},

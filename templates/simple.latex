@@ -2,7 +2,8 @@
 % !TEX encoding = UTF-8 Unicode
 
 
-\documentclass[11pt,article,oneside]{memoir}
+\documentclass[11pt,article,oneside,article]{article}
+
 $if(geometry)$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
@@ -56,7 +57,7 @@ $endif$
 
 
 % Title
-\pretitle{\begin{flushleft}\LARGE\sffamily\bfseries\noindent}
+%\pretitle{\begin{flushleft}\LARGE\sffamily\bfseries\noindent}
 %\posttitle{\end{flushleft}\par\vskip 2.5em}
 %\preauthor{\begin{flushleft}\Large\sffamily}
 %\postauthor{\end{flushleft}}
@@ -137,6 +138,7 @@ $endif$
 \usepackage{enumitem}
 \setlist[itemize]{leftmargin=*}
 
+\def\tightlist{}
 
 \usepackage{hyperref}
 \hypersetup{
@@ -165,6 +167,8 @@ $endif$
 
 %\urlstyle{same}
 
+\setcounter{tocdepth}{1}
+
 \begin{document} 
 \linespread{1.1}
 
@@ -182,6 +186,11 @@ $endif$
 % must be modified with any template updates.
 \normalfont\normalsize
 
+\linespread{.2}
+$if(toc)$\tableofcontents $endif$
+
+\linespread{1.1}
+\normalfont\normalsize
 \setlength{\parskip}{0.2\baselineskip}
 $body$
 \end{document}

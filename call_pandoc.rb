@@ -27,8 +27,8 @@ if options == "scrivener"
     filename = "#{scrivener_output_directory}/#{filename}"
 end 
 
-puts " options: #{options} \n"
-puts " input filename: X#{filename} \n"
+#puts " options: #{options} \n"
+#puts " input filename: #{filename} \n"
 
 hash = {
     "handout"    	=>   ["-d local-defaults -d pandoc-scholar-html -d course-handout-html --self-contained", "html"],
@@ -36,9 +36,10 @@ hash = {
     "UC_letterhead"	=>   ["-d local-defaults -d UC-letterhead-latex --pdf-engine=/Library/TeX/texbin/xelatex --quiet", "pdf"],
     "letter"	    =>   ["-d local-defaults -d letter --pdf-engine=/Library/TeX/texbin/xelatex --quiet", "pdf"],
     "old_fashioned"	=>   ["-d local-defaults -d old-fashioned-article --pdf-engine=/Library/TeX/texbin/xelatex --quiet", "pdf"],
+    "beamer" =>   ["-d local-defaults --to=beamer --pdf-engine=/Library/TeX/texbin/xelatex -V fontsize=10pt --quiet", "pdf"],
     "reveal"        =>   ["-d local-defaults -d reveal-js", "html"],
     "scholar_html"  =>    ["-d local-defaults -d pandoc-scholar-html --self-contained", "html"],
-    "simple" =>   ["-d local-defaults -d simple --pdf-engine=/Library/TeX/texbin/xelatex --quiet", "tex" ],
+    "simple_tex" =>   ["-d local-defaults -d simple --pdf-engine=/Library/TeX/texbin/xelatex --quiet", "tex" ],
     "syllabus_tex"      =>   ["-d local-defaults -d formal-syllabus-latex --quiet", "tex"],
     "UC_letterhead_tex" =>   ["-d local-defaults -d UC-letterhead-latex --quiet", "tex"],
     "letter_tex"        =>   ["-d local-defaults -d letter --quiet", "tex"],

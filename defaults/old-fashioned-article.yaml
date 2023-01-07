@@ -1,12 +1,11 @@
 from: markdown
 to: latex
 pdf-engine: pdflatex
-cite-method: citeproc
 template: old-fashioned-article.latex
 metadata:
+  csl: chicago-note-bibliography.csl
   linespacing: '1.1'
   fontsize: '12pt'
-  csl: chicago-note-bibliography.csl
   colorlinks: true
   mainfont: 'TeX Gyre Schola'
   mainfontoptions: 'Mapping=tex-text, Numbers=Proportional'

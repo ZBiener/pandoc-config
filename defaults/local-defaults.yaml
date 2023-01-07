@@ -13,7 +13,7 @@ metadata:
   bibliography: "/Users/zvb1/Library/texmf/bibtex/bib/BibDeskLibrary.json" #converted from the bib format, just for CSL use. #JSON faster than BIB
   reference-links: true
   reference-section-title: References
-  notes-after-punctuation: false
+  notes-after-punctuation: true
   link-citations: true
   csl-hanging-indent: true
   lang: 'en-US'

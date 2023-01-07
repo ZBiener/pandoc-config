@@ -5,7 +5,7 @@ filters:
 template: simple.latex 
 standalone: true
 metadata:
-  csl: chicago-syllabus.csl
+  csl: chicago-author-date.csl
   mainfont: 'Bembo Std'
   mainfontoptions: 'Mapping=tex-text, Numbers=Proportional'
   sansfont: 'Myriad Pro SemiExtended'

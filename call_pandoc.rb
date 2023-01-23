@@ -30,23 +30,24 @@ end
 #puts " options: #{options} \n"
 #puts " input filename: #{filename} \n"
 
+base_config_pdf=' --pdf-engine=/Library/TeX/texbin/xelatex --quiet,pdf'
+
 hash = {
-    "handout"    	=>   ["-d local-defaults -d pandoc-scholar-html -d course-handout-html --self-contained", "html"],
-    "syllabus"  	=>   ["-d local-defaults -d formal-syllabus-latex --pdf-engine=/Library/TeX/texbin/xelatex --quiet", "pdf"],
-    "UC_letterhead"	=>   ["-d local-defaults -d UC-letterhead-latex --pdf-engine=/Library/TeX/texbin/xelatex --quiet", "pdf"],
-    "letter"	    =>   ["-d local-defaults -d letter --pdf-engine=/Library/TeX/texbin/xelatex --quiet", "pdf"],
-    "old_fashioned"	=>   ["-d local-defaults -d old-fashioned-article --pdf-engine=/Library/TeX/texbin/xelatex --quiet", "pdf"],
-    "beamer" =>   ["-d local-defaults --to=beamer --pdf-engine=/Library/TeX/texbin/xelatex -V fontsize=10pt --quiet", "pdf"],
-    "reveal"        =>   ["-d local-defaults -d reveal-js", "html"],
-    "scholar_html"  =>    ["-d local-defaults -d pandoc-scholar-html --self-contained", "html"],
-    "simple_tex" =>   ["-d local-defaults -d simple --pdf-engine=/Library/TeX/texbin/xelatex --quiet", "tex" ],
-    "syllabus_tex"      =>   ["-d local-defaults -d formal-syllabus-latex --quiet", "tex"],
-    "UC_letterhead_tex" =>   ["-d local-defaults -d UC-letterhead-latex --quiet", "tex"],
-    "letter_tex"        =>   ["-d local-defaults -d letter --quiet", "tex"],
-    "old_fashioned_tex" =>   ["-d local-defaults -d old-fashioned-article --quiet", "tex"],
+    "handout"    	=>      [base_config_pdf +  "-d pandoc-scholar-html -d course-handout-html --self-contained", "html"],
+    "syllabus"  	=>      [base_config_pdf + "-d formal-syllabus-latex", "pdf"],
+    "UC_letterhead"	=>      [base_config_pdf + "-d UC-letterhead-latex", "pdf"],
+    "letter"	    =>      [base_config_pdf + "-d letter", "pdf"],
+    "old_fashioned"	=>      [base_config_pdf + "-d old-fashioned-article", "pdf"],
+    "beamer" =>             ("--to=beamer -V fontsize=10pt"+base_config_pdf).split(","),
+    "scholar_html"  =>      ["-d pandoc-scholar-html --self-contained", "html"],
+    "simple_tex" =>         [base_config_pdf + "-d simple", "tex" ],
+    "syllabus_tex"      =>  ["-d formal-syllabus-latex", "tex"],
+    "UC_letterhead_tex" =>  ["-d UC-letterhead-latex", "tex"],
+    "letter_tex"        =>  ["-d letter", "tex"],
+    "old_fashioned_tex" =>  ["-d old-fashioned-article", "tex"],
     "scholar_html_tex"  =>    ["-d local-defaults -d pandoc-scholar-html --self-contained", "html"],
-    "simple" =>   ["-d local-defaults -d simple --pdf-engine=/Library/TeX/texbin/xelatex --quiet", "pdf" ],
-    "bib_list" =>   ["-d local-defaults -d bib_list --pdf-engine=/Library/TeX/texbin/xelatex --quiet", "pdf" ],
+    "simple" =>   ["-d local-defaults -d simple --pdf-engine=/Library/TeX/texbin/xelatex", "pdf" ],
+    "bib_list" =>   ["-d local-defaults -d bib_list --pdf-engine=/Library/TeX/texbin/xelatex", "pdf" ],
     "scrivener" => ["read_file_metadata"],
     "metadata" => ["read_file_metadata"],
 
@@ -86,7 +87,7 @@ output_filename = File.join(base_directory, File.basename(filename)).ext(extensi
 
 ## Construct command
 
-command = "pandoc --metadata-file=\"#{metadata_filename}\" #{options} --output \"#{output_filename}\" \"#{filename}\""
+command = "pandoc --metadata-file=\"#{metadata_filename}\" -d local-defaults #{options} --output \"#{output_filename}\" \"#{filename}\""
 
 ## Run command
 puts command

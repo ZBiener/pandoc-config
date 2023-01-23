@@ -5,12 +5,12 @@ cite-method: citeproc
 resource-path: 
   - "."
   - "./images/"
-  - /Users/zvb1/.pandoc/  # requires because relative location of some data files (e.g., css) is not allowed(?) in default files
+  - /Users/zvb1/.local/share/pandoc/
 filters:
   - pagebreak/pagebreak.lua 
 
 metadata:
-  bibliography: "/Users/zvb1/Library/texmf/bibtex/bib/BibDeskLibrary.json" #converted from the bib format, just for CSL use. #JSON faster than BIB
+  bibliography: "bib/BibDeskLibrary.bib" #converted from the bib format, just for CSL use. #JSON faster than BIB
   reference-links: true
   reference-section-title: References
   notes-after-punctuation: true

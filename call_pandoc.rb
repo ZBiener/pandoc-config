@@ -14,7 +14,7 @@ puts "NEW RUN"
 # supersedes format_option specified in the file metadata
 
 ## Define standard options
-metadata_filename = "/Users/zvb1/.pandoc/defaults/user-metadata.yaml"
+metadata_filename = "/Users/zvb1/.local/share/pandoc/defaults/user-metadata.yaml"
 local_defaults_filename = 'local-defaults'
 scrivener_output_directory="/Users/zvb1/Temp/LaTeX_Compile"
 options = "#{$*[0]}"
@@ -87,7 +87,7 @@ output_filename = File.join(base_directory, File.basename(filename)).ext(extensi
 
 ## Construct command
 
-command = "pandoc --metadata-file=\"#{metadata_filename}\" -d local-defaults #{options} --output \"#{output_filename}\" \"#{filename}\""
+command = "pandoc -d local-defaults --metadata-file=\"#{metadata_filename}\"  #{options} --output \"#{output_filename}\" \"#{filename}\""
 
 ## Run command
 puts command

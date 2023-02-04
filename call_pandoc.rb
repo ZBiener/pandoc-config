@@ -30,16 +30,16 @@ end
 #puts " options: #{options} \n"
 #puts " input filename: #{filename} \n"
 
-base_config_pdf=' --pdf-engine=/Library/TeX/texbin/xelatex --quiet,pdf'
+base_config_pdf=' --pdf-engine=/Library/TeX/texbin/xelatex --quiet '
 
 hash = {
-    "handout"    	=>      [base_config_pdf +  "-d pandoc-scholar-html -d course-handout-html --self-contained", "html"],
+    "handout"    	=>      [base_config_pdf + "-d pandoc-scholar-html -d course-handout-html --self-contained", "html"],
     "syllabus"  	=>      [base_config_pdf + "-d formal-syllabus-latex", "pdf"],
     "UC_letterhead"	=>      [base_config_pdf + "-d UC-letterhead-latex", "pdf"],
     "letter"	    =>      [base_config_pdf + "-d letter", "pdf"],
     "old_fashioned"	=>      [base_config_pdf + "-d old-fashioned-article", "pdf"],
-    "beamer" =>             ("--to=beamer -V fontsize=10pt"+base_config_pdf).split(","),
-    "scholar_html"  =>      ["-d pandoc-scholar-html --self-contained", "html"],
+    "beamer" =>             [base_config_pdf + "-d beamer", "pdf"],
+    "scholar_html"  =>      [base_config_pdf + "-d pandoc-scholar-html --self-contained", "html"],
     "simple_tex" =>         [base_config_pdf + "-d simple", "tex" ],
     "syllabus_tex"      =>  ["-d formal-syllabus-latex", "tex"],
     "UC_letterhead_tex" =>  ["-d UC-letterhead-latex", "tex"],
